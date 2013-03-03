@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <ImageView android:id="@+id/app_logo"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:layout_marginLeft="47dp"
+	        android:layout_marginRight="47dp"
+	        android:contentDescription="@string/logo"
+	        android:src="@drawable/collections" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/connect"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+        
+        <ImageButton android:id="@+id/connect_facebook"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/blue_button"
+            android:contentDescription="@string/facebook"
+            android:src="@drawable/bar_facebook_icon"/>
+        
+        <ImageButton android:id="@+id/connect_twitter"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@id/connect_facebook"
+            android:background="@drawable/blue_button"
+            android:contentDescription="@string/twitter"
+            android:src="@drawable/bar_twitter_icon"/>
+        
+        <ImageButton android:id="@+id/connect_gmail"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@id/connect_twitter"
+            android:background="@drawable/blue_button"
+            android:contentDescription="@string/facebook"
+            android:src="@drawable/bar_facebook_icon"/>
+        
+    </RelativeLayout>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:text="@string/or"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF" />
+    
+    <RelativeLayout android:id="@+id/signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:background="@drawable/buckets" >
+        
+        <EditText android:id="@+id/signup_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
+            android:hint="@string/username"
+            android:inputType="text"
+            android:textSize="18sp" />
+        
+        <View android:id="@+id/separator1"
+		        android:background="#DDDDDD"
+		        android:layout_width="match_parent"
+		        android:layout_height="1dp"
+		        android:layout_below="@id/signup_username" />
+        
+        <EditText android:id="@+id/signup_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/separator1"
+            android:background="#00000000"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
+            android:hint="@string/email_address"
+            android:inputType="textEmailAddress"
+            android:textSize="18sp" />
+        
+        <View android:id="@+id/separator2"
+		        android:background="#DDDDDD"
+		        android:layout_width="match_parent"
+		        android:layout_height="1dp"
+		        android:layout_below="@id/signup_email" />
+        
+        <EditText android:id="@+id/signup_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/separator2"
+            android:background="#00000000"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textSize="18sp" />
+        
+    </RelativeLayout>
+    
+    <Button android:id="@+id/continue_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/blue_button"
+        android:padding="16dp"
+        android:text="@string/cont"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:onClick="continue_clicked" />
+    
+
+</LinearLayout>

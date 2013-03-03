@@ -32,7 +32,7 @@
         android:layout_height="0dp"
         android:layout_weight="3" />
     
-    <RelativeLayout android:id="@+id/sign_in"
+    <RelativeLayout android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -40,7 +40,7 @@
         android:layout_marginRight="35dp"
         android:background="@drawable/buckets" >
         
-        <EditText android:id="@+id/sign_in_username"
+        <EditText android:id="@+id/login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#00000000"
@@ -56,9 +56,9 @@
 		        android:background="#DDDDDD"
 		        android:layout_width="match_parent"
 		        android:layout_height="1dp"
-		        android:layout_below="@id/sign_in_username" />
+		        android:layout_below="@id/login_username" />
         
-        <EditText android:id="@+id/sign_in_password"
+        <EditText android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/separator"
@@ -73,7 +73,7 @@
         
     </RelativeLayout>
     
-    <Button android:id="@+id/sign_in_button"
+    <Button android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -82,10 +82,10 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/blue_button"
         android:padding="18dp"
-        android:text="@string/sign_in"
+        android:text="@string/login"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:onClick="sign_in_clicked" />
+        android:onClick="login_clicked" />
     
     <TextView
         android:layout_width="wrap_content"

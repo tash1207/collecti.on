@@ -4,15 +4,27 @@
     <string name="app_name">Collection</string>
     <string name="action_settings">Settings</string>
     
-    <!-- Sign In -->
+    <!-- Log In -->
     <string name="logo">Logo</string>
     <string name="question_mark">Question Mark</string>
     <string name="username">Username</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
-    <string name="sign_in">Sign In</string>
+    <string name="login">Log In</string>
     <string name="or">- or -</string>
     <string name="create_account">Create an Account</string>
     <string name="browse_collections">Browse Collections</string>
+    
+    <!-- Sign Up -->
+    <string name="connect">Connect With:</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="signup">Sign Up</string>
+    <string name="cont">Continue</string>
+    
+    <!-- Browse Collections -->
+    <string name="add_collection">Add A Collection</string>
+    <string name="search">Search</string>
+    <string name="side_nav">Side Navigation</string>
 
 </resources>
