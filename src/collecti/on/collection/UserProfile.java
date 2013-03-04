@@ -3,6 +3,7 @@ package collecti.on.collection;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -27,7 +28,8 @@ public class UserProfile extends Activity {
 	}
 	
 	public void add_collection(View v) {
-		
+		Intent add_collection = new Intent(getApplicationContext(), AddCollection.class);
+		startActivity(add_collection);
 	}
 
 }

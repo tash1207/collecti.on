@@ -31,19 +31,23 @@
     <string-array name="browse_collection_options">
         <item>All</item>
         <item>My Favorites</item>
+        <item>Books</item>
         <item>Cards</item>
         <item>Coins</item>
-        <item>Comic Books</item>
         <item>Electronics</item>
         <item>Figurines</item>
+        <item>Media</item>
         <item>Stamps</item>
     </string-array>
     
     <string name="picture">Picture</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
+    <string name="category">Category</string>
+    <string name="privacy">Private?</string>
     
     <!-- User Profile -->
     <string name="my_collections">My Collections</string>
+    <string name="add_item">Add An Item</string>
 
 </resources>

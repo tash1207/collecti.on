@@ -87,7 +87,7 @@
                 android:textColor="#121212"
                 android:textStyle="bold" />
 	            
-           </LinearLayout>
+        </LinearLayout>
            
            <TextView android:id="@+id/my_collections"
                android:layout_width="match_parent"

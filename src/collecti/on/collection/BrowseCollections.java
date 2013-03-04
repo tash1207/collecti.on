@@ -65,7 +65,8 @@ public class BrowseCollections extends Activity {
 	}
 
 	public void header_add_clicked(View v) {
-		
+		Intent add_collection = new Intent(getApplicationContext(), AddCollection.class);
+		startActivity(add_collection);
 	}
 	
 	public void header_search_clicked(View v) {
