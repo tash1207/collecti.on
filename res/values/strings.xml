@@ -13,7 +13,7 @@
     <string name="login">Log In</string>
     <string name="or">- or -</string>
     <string name="create_account">Create an Account</string>
-    <string name="browse_collections">Browse Collections</string>
+    <string name="browse">Browse</string>
     
     <!-- Sign Up -->
     <string name="connect">Connect With:</string>
@@ -26,5 +26,24 @@
     <string name="add_collection">Add A Collection</string>
     <string name="search">Search</string>
     <string name="side_nav">Side Navigation</string>
+    <string name="browse_by">BROWSE BY:</string>
+    
+    <string-array name="browse_collection_options">
+        <item>All</item>
+        <item>My Favorites</item>
+        <item>Cards</item>
+        <item>Coins</item>
+        <item>Comic Books</item>
+        <item>Electronics</item>
+        <item>Figurines</item>
+        <item>Stamps</item>
+    </string-array>
+    
+    <string name="picture">Picture</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    
+    <!-- User Profile -->
+    <string name="my_collections">My Collections</string>
 
 </resources>

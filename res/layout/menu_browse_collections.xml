@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout android:id="@+id/header_nav"
+    	android:layout_width="fill_parent"
+    	android:layout_height="35dp"
+    	android:background="@drawable/side_nav_label_background" >
+    	
+        <TextView 
+            style="@style/side_nav_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="15dp"
+            android:text="@string/browse_by" />
+        
+    </RelativeLayout>
+    
+    <ListView android:id="@+id/lvw_browse_collections"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_lines"
+        android:dividerHeight="2dp"
+        android:fadingEdge="none"
+        android:scrollbars="none"
+        android:splitMotionEvents="false" />
+    
+
+</LinearLayout>

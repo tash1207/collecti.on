@@ -5,56 +5,75 @@
     
      <RelativeLayout android:id="@+id/header"
 	    	android:layout_width="fill_parent"
-	    	android:layout_height="45dp"
-	    	android:background="#705EBF" >
+	    	android:layout_height="55dp"
+	    	android:background="#FF6300AB" >
+	    	
+        <FrameLayout
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_alignParentLeft="true" >
 	    	
 	    	<ImageView android:id="@+id/header_login_button"
-		        android:layout_width="45dp"
-		        android:layout_height="45dp"
-		        android:layout_alignParentLeft="true"
-		        android:layout_centerVertical="true"
-		        android:padding="8dp"
+		        android:layout_width="55dp"
+		        android:layout_height="55dp"
 		        android:contentDescription="@string/login"
 		        android:src="@drawable/ic_launcher"
-		        android:scaleType="fitCenter"
+		        android:scaleType="fitXY"
 		        android:clickable="true"
-		        android:onClick="header_login_clicked" />
+		        android:onClick="header_login_clicked"
+		        android:visibility="gone" />
+	    	
+	    	<ImageView android:id="@+id/header_user_button"
+		        android:layout_width="55dp"
+		        android:layout_height="55dp"
+		        android:contentDescription="@string/username"
+		        android:src="@drawable/icon_person"
+		        android:scaleType="fitXY"
+		        android:clickable="true"
+		        android:onClick="header_person_clicked" />
+	    	
+	    	</FrameLayout>
 	    	
 	    	<LinearLayout
 	    	    android:layout_width="wrap_content"
 	    	    android:layout_height="wrap_content"
 	    	    android:orientation="horizontal"
 	    	    android:layout_alignParentRight="true" >
+	    	    
+	    	  <ImageView android:id="@+id/header_add_collection_button"
+			        android:layout_width="55dp"
+			        android:layout_height="55dp"
+			        android:layout_gravity="center"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
+			        android:padding="8dp"
+			        android:contentDescription="@string/add_collection"
+			        android:src="@drawable/icon_add"
+			        android:scaleType="fitCenter"
+			        android:clickable="true"
+			        android:onClick="header_add_clicked"  />
 	        
 			    <ImageView android:id="@+id/header_search_button"
-			        android:layout_width="45dp"
-			        android:layout_height="45dp"
+			        android:layout_width="55dp"
+			        android:layout_height="55dp"
 			        android:layout_gravity="center"
+			        android:layout_marginLeft="5dp"
+			        android:layout_marginRight="5dp"
 			        android:padding="8dp"
 			        android:contentDescription="@string/search"
-			        android:src="@drawable/ic_launcher"
+			        android:src="@drawable/icon_search"
 			        android:scaleType="fitCenter"
 			        android:clickable="true"
 			        android:onClick="header_search_clicked" />
 			    
-			    <ImageView android:id="@+id/header_add_collection_button"
-			        android:layout_width="45dp"
-			        android:layout_height="45dp"
-			        android:layout_gravity="center"
-			        android:padding="8dp"
-			        android:contentDescription="@string/add_collection"
-			        android:src="@drawable/ic_launcher"
-			        android:scaleType="fitCenter"
-			        android:clickable="true"
-			        android:onClick="header_add_clicked"  />
-			    
 			    <ImageView android:id="@+id/header_side_menu_button"
-			        android:layout_width="45dp"
-			        android:layout_height="45dp"
+			        android:layout_width="55dp"
+			        android:layout_height="55dp"
 			        android:layout_gravity="center"
+			        android:layout_marginLeft="5dp"
 			        android:padding="8dp"
 			        android:contentDescription="@string/side_nav"
-			        android:src="@drawable/ic_launcher"
+			        android:src="@drawable/icon_nav"
 			        android:scaleType="fitCenter"
 			        android:clickable="true"
 			        android:onClick="header_side_menu_clicked"  />
@@ -62,6 +81,12 @@
 	    	</LinearLayout>
 	    
     </RelativeLayout>
+         
+    <ListView android:id="@+id/lvw_collections"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header" 
+        android:visibility="visible"/>
     
     <RelativeLayout android:id="@+id/login_menu"
         android:layout_width="wrap_content"
@@ -97,12 +122,5 @@
     	    android:onClick="signup_clicked"  />
     
     </RelativeLayout>
-    
-    <ListView android:id="@+id/lvw_collections"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header" 
-        android:visibility="visible"/>
-    
 
 </RelativeLayout>

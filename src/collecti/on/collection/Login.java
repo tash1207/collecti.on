@@ -12,18 +12,23 @@ public class Login extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
+		// if user is already logged in, open browse collections activity
 	}
 	
-	public void log_in_clicked(View v) {
+	public void login_clicked(View v) {
 		// what happens after logging in
+		Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
+		startActivity(browse);
+		finish();
 	}
 	
-	public void create_account_clicked(View v) {
+	public void signup_clicked(View v) {
 		Intent signup = new Intent(getApplicationContext(), Signup.class);
 		startActivity(signup);
 	}
 	
-	public void browse_collections_clicked(View v) {
+	public void browse_clicked(View v) {
 		Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
 		startActivity(browse);
 	}
