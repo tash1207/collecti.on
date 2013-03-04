@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import collecti.on.adapters.BrowseCollectionsAdapter;
 import collecti.on.adapters.SideMenuAdapter;
 import collecti.on.dataypes.Collection;
@@ -82,9 +83,6 @@ public class BrowseCollections extends Activity {
 	}
 
 	public void header_add_clicked(View v) {
-		Intent add_collection = new Intent(getApplicationContext(), AddCollection.class);
-		startActivity(add_collection);
-		/*
 		String username = prefs.getString("username", "");
 		if (!username.equals("")) {
 			Intent add_collection = new Intent(getApplicationContext(), AddCollection.class);
@@ -94,7 +92,6 @@ public class BrowseCollections extends Activity {
 		else {
 			Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
 		}
-		*/
 	}
 	
 	public void header_search_clicked(View v) {

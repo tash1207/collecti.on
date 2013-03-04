@@ -1,9 +1,10 @@
 package collecti.on.collection;
 
-import io.filepicker.FilePicker;
 import io.filepicker.FilePickerAPI;
 
 import java.util.ArrayList;
+
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,15 +13,22 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 import collecti.on.adapters.BrowseCollectionsAdapter;
 import collecti.on.dataypes.Collection;
+import collecti.on.http.AsyncHttpRequest;
 import collecti.on.misc.LoadImageCache;
 import collecti.on.misc.Utility;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
 public class UserProfile extends Activity {
+	String username;
 	final static int AFTER_CROP = 22;
 	
 	@Override
@@ -29,6 +37,7 @@ public class UserProfile extends Activity {
 		setContentView(R.layout.activity_user_profile);
 		
 		SharedPreferences prefs = getSharedPreferences("Collection", Context.MODE_PRIVATE);
+		username = prefs.getString("username", "");
 		ImageView profile_pic = (ImageView) findViewById(R.id.profile_picture);
 		LoadImageCache loader = new LoadImageCache(this);
 		loader.display(prefs.getString("photo", ""), profile_pic);
@@ -44,10 +53,29 @@ public class UserProfile extends Activity {
 	}
 	
 	public void upload_profile_picture(View v) {
+		/*
 		FilePickerAPI.setKey("AzI5rM78ISmyNrvJRkSpbz");
 		
 		Intent intent = new Intent(this, FilePicker.class);
 		startActivityForResult(intent, FilePickerAPI.REQUEST_CODE_GETFILE);
+		*/
+		
+
+		RequestParams requestParams = new RequestParams();
+		requestParams.put("username", username);
+		
+		AsyncHttpRequest.POST("/user/collections", requestParams, new JsonHttpResponseHandler() {
+			@Override
+			public void onSuccess(JSONObject response) {
+				Log.d("json_collections", response.toString());
+			}
+			
+			@Override
+			public void onFailure(Throwable e, JSONObject errorResponse) {
+			    Log.d("json_collections", errorResponse.toString());
+			    Toast.makeText(UserProfile.this, "An error occurred", Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 	
 	public void add_collection(View v) {
@@ -71,5 +99,4 @@ public class UserProfile extends Activity {
     		}
 		}
 	}
-
 }

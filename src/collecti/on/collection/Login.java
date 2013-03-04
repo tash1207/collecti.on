@@ -27,10 +27,11 @@ public class Login extends Activity {
 		setContentView(R.layout.activity_login);
 		
 		prefs = getSharedPreferences("Collection", Context.MODE_PRIVATE);
+		/*
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.clear();
 		editor.commit();
-		
+		*/
 		String username = prefs.getString("username", "");
 		if (!username.equals("")) {
 			Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
@@ -60,8 +61,8 @@ public class Login extends Activity {
 				
 				try {
 					if ((Boolean) response.get("login")) {
-						SharedPreferences.Editor editor = prefs.edit();
 						JSONObject user = response.getJSONObject("user");
+						SharedPreferences.Editor editor = prefs.edit();
 						editor.putString("username", user.getString("username"));
 						editor.putString("email", user.getString("email"));
 						editor.putString("photo", user.getString("url"));
