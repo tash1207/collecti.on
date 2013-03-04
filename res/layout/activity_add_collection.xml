@@ -28,6 +28,9 @@
 		            android:background="#00000000"
 		            android:padding="10dp"
 		            android:hint="@string/title"
+		            android:inputType="textCapWords"
+		            android:singleLine="true"
+		            android:maxLength="50"
 		            android:textColor="#444444"
 		            android:textSize="17sp" />
 		        
@@ -44,6 +47,9 @@
 		            android:background="#00000000"
 		            android:padding="10dp"
 		            android:hint="@string/description"
+		            android:inputType="text"
+		            android:singleLine="true"
+		            android:maxLength="350"
 		            android:textColor="#444444"
 		            android:textSize="17sp" />
 		        
@@ -54,7 +60,7 @@
 		            android:background="#DDDDDD" />
 		        
 		        <TextView android:id="@+id/edit_category"
-		            android:layout_width="wrap_content"
+		            android:layout_width="match_parent"
 		            android:layout_height="wrap_content"
 		            android:layout_below="@id/sep1"
 		            android:background="#00000000"
@@ -66,14 +72,16 @@
 		            android:onClick="select_category" />
 		        
 		        <TextView android:id="@+id/chosen_category"
-		            android:layout_width="match_parent"
+		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:layout_below="@id/sep1"
-		            android:layout_toRightOf="@id/edit_category"
+		            android:layout_alignParentRight="true"
 		            android:background="#00000000"
 		            android:padding="10dp"
-		            android:textColor="#444444"
-		            android:textSize="17sp" />
+		            android:textColor="#4444CC"
+		            android:textSize="17sp"
+		            android:clickable="true"
+		            android:onClick="select_category" />
 		        
 		        <View android:id="@+id/sep2"
 		            android:layout_width="match_parent"
@@ -103,7 +111,7 @@
         
     </LinearLayout>
     
-    <LinearLayout
+    <LinearLayout android:id="@+id/add_item_button"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginLeft="20dp"
@@ -113,14 +121,14 @@
            android:orientation="horizontal"
            android:background="@drawable/rounded_blue"
            android:clickable="true"
-           android:onClick="add_collection" >
+           android:onClick="add_item" >
               
-              <ImageView
-                  android:layout_width="40dp"
-                  android:layout_height="40dp"
-                  android:padding="5dp"
-                  android:contentDescription="@string/add_collection"
-                  android:src="@drawable/icon_add" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="5dp"
+                android:contentDescription="@string/add_collection"
+                android:src="@drawable/icon_add" />
           
             <TextView android:id="@+id/add_item"
                 android:layout_width="wrap_content"
@@ -129,10 +137,78 @@
                 android:layout_margin="5dp"
                 android:text="@string/add_item"
                 android:textSize="18sp"
-                android:textColor="#121212"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 	            
         </LinearLayout>
+        
+    <RelativeLayout android:id="@+id/item"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/selector_grey_to_purple"
+		    android:layout_marginLeft="20dp"		    
+		    android:layout_marginRight="20dp"
+		    android:layout_marginTop="20dp"
+		    android:layout_marginBottom="5dp"
+		    android:visibility="gone" >
+		    
+		    <ImageView android:id="@+id/item_picture"
+		        android:layout_width="85dp"
+		        android:layout_height="85dp"
+		        android:layout_centerVertical="true"
+		        android:contentDescription="@string/picture"
+		        android:clickable="true"
+		        android:onClick="add_item" />
+		    
+		    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/item_picture" >
+				    
+		        <EditText android:id="@+id/item_title"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:background="#00000000"
+		            android:padding="8dp"
+		            android:hint="@string/title"
+		            android:singleLine="true"
+		            android:maxLength="50"
+		            android:textColor="#444444"
+		            android:textSize="17sp" />
+		        
+		        <View android:id="@+id/sep3"
+		            android:layout_width="match_parent"
+		            android:layout_height="1dp"
+		            android:layout_below="@id/item_title"
+		            android:background="#DDDDDD" />
+		        
+		        <EditText android:id="@+id/item_description"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_below="@id/sep3"
+		            android:background="#00000000"
+		            android:padding="8dp"
+		            android:hint="@string/description"
+		            android:singleLine="true"
+		            android:maxLength="350"
+		            android:textColor="#444444"
+		            android:textSize="17sp" />
+		
+		</RelativeLayout>
+		
+		</RelativeLayout>
+        
+    <Button android:id="@+id/create_collection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/rounded_purple"
+        android:padding="20dp"
+        android:text="@string/create_collection"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:onClick="create_collection" />
         
 </LinearLayout>    
 

@@ -31,7 +31,7 @@ public class LoadImageCache {
 	public void display(String url, ImageView imageview) {
 	    Bitmap image = cache.get(url);
 	    if (image != null) {
-	        imageview.setImageBitmap(Utility.getRoundedCorners(image));
+	        imageview.setImageBitmap(image);
 	    }
 	    else {
 	        new SetImageTask(imageview).execute(url);
@@ -74,7 +74,7 @@ public class LoadImageCache {
 	    @Override
 	    protected void onPostExecute(Integer result) {
 	        if(result == 1) {
-	            imageview.setImageBitmap(Utility.getRoundedCorners(bmp));
+	            imageview.setImageBitmap(bmp);
 	        }
 	        super.onPostExecute(result);
 	    }

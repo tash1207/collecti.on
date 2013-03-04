@@ -8,7 +8,7 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
     <uses-permission android:name="android.permission.INTERNET" />
-    
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -41,6 +41,18 @@
             android:name="collecti.on.collection.AddCollection"
             android:screenOrientation="portrait" >
         </activity>
-    </application>
+        <activity 
+            android:name="collecti.on.collection.ViewCollection"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+				    android:name="io.filepicker.FilePicker"
+				    android:label="@string/title_activity_file_picker" >
+				</activity>
+				<activity
+				    android:name="io.filepicker.AuthActivity"
+				    android:label="@string/title_activity_file_picker_auth" >
+				</activity>
+		</application>
 
 </manifest>

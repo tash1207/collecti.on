@@ -4,7 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,11 +19,24 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 public class Login extends Activity {
+	SharedPreferences prefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
+		prefs = getSharedPreferences("Collection", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.clear();
+		editor.commit();
+		
+		String username = prefs.getString("username", "");
+		if (!username.equals("")) {
+			Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
+			startActivity(browse);
+			finish();
+		}
 		
 		// if user is already logged in, open browse collections activity
 	}
@@ -45,6 +60,12 @@ public class Login extends Activity {
 				
 				try {
 					if ((Boolean) response.get("login")) {
+						SharedPreferences.Editor editor = prefs.edit();
+						JSONObject user = response.getJSONObject("user");
+						editor.putString("username", user.getString("username"));
+						editor.putString("email", user.getString("email"));
+						editor.putString("photo", user.getString("url"));
+						editor.commit();
 						Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
 						startActivity(browse);
 						finish();

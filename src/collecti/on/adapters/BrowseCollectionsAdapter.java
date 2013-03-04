@@ -3,6 +3,7 @@ package collecti.on.adapters;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import collecti.on.collection.R;
+import collecti.on.collection.ViewCollection;
 import collecti.on.dataypes.Collection;
 import collecti.on.misc.LoadImageCache;
 
@@ -77,6 +79,8 @@ public class BrowseCollectionsAdapter extends ArrayAdapter<Collection> {
 	    	
 			public void onClick(View v) {
 				// open that collection!
+				Intent view_collection = new Intent(context, ViewCollection.class);
+				context.startActivity(view_collection);
 			}
 	    };
 		

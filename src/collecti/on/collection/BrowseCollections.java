@@ -3,25 +3,42 @@ package collecti.on.collection;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import collecti.on.adapters.BrowseCollectionsAdapter;
 import collecti.on.adapters.SideMenuAdapter;
 import collecti.on.dataypes.Collection;
+import collecti.on.misc.LoadImageCache;
 import collecti.on.misc.Utility;
 
 import com.slidingmenu.lib.SlidingMenu;
 
 public class BrowseCollections extends Activity {
+	SharedPreferences prefs;
 	SlidingMenu menu;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_browse_collections);
+		
+		prefs = getSharedPreferences("Collection", Context.MODE_PRIVATE);
+		String username = prefs.getString("username", "");
+		if (!username.equals("")) {
+			ImageView login = (ImageView) findViewById(R.id.header_login_button);
+			ImageView user = (ImageView) findViewById(R.id.header_user_button);
+			
+			login.setVisibility(View.GONE);
+			user.setVisibility(View.VISIBLE);
+			LoadImageCache loader = new LoadImageCache(this);
+			loader.display(prefs.getString("photo", ""), user);
+		}
 		
 		Collection snowglobes = new Collection("Dave", "Snowglobes", "My Collection!", "http://www.ddetc.com/313-large/disney-vintage-christmas-snowglobe-music-box.jpg");
 		Collection stamps = new Collection("Chris", "Stamps", "WWII Era", "http://www.scarceantiqueshop.com/antique_stamp_523x600.jpg");
@@ -43,7 +60,7 @@ public class BrowseCollections extends Activity {
 		
 		ListView browse_collections = (ListView) findViewById(R.id.lvw_browse_collections);
 		browse_collections.setAdapter(new SideMenuAdapter(this, R.layout.custom_lvw_side_menu, R.id.side_menu_category,
-				getResources().getStringArray(R.array.browse_collection_options)));
+				getResources().getStringArray(R.array.collection_categories)));
 	}
 	
 	// HEADER BUTTONS
@@ -67,6 +84,17 @@ public class BrowseCollections extends Activity {
 	public void header_add_clicked(View v) {
 		Intent add_collection = new Intent(getApplicationContext(), AddCollection.class);
 		startActivity(add_collection);
+		/*
+		String username = prefs.getString("username", "");
+		if (!username.equals("")) {
+			Intent add_collection = new Intent(getApplicationContext(), AddCollection.class);
+			startActivity(add_collection);
+		}
+		
+		else {
+			Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
+		}
+		*/
 	}
 	
 	public void header_search_clicked(View v) {
