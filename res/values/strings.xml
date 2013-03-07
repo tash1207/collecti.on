@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Collection</string>
+    <string name="app_name">Cloud Collect</string>
     <string name="action_settings">Settings</string>
     
     <!-- Log In -->
@@ -27,6 +27,8 @@
     <string name="search">Search</string>
     <string name="side_nav">Side Navigation</string>
     <string name="browse_by">BROWSE BY:</string>
+    <string name="view_profile">View Profile</string>
+    <string name="logout">Log Out</string>
     
     <string-array name="collection_categories">
         <item>Books</item>
@@ -45,7 +47,9 @@
     <string name="privacy">Private?</string>
     
     <!-- User Profile -->
+    <string name="two">2</string>
     <string name="my_collections">My Collections</string>
+    <string name="my_favorites">My Favorites</string>
     <string name="add_item">Add An Item</string>
     <string name="create_collection">Create Collection!</string>
 

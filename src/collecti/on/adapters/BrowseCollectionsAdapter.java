@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -67,8 +66,28 @@ public class BrowseCollectionsAdapter extends ArrayAdapter<Collection> {
 		}		
 		
 		// Set the default image ..
-		viewHolder.image.setImageBitmap(
-				BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher));
+		if (collections.get(position).category.equals("Books")) {
+			viewHolder.image.setImageResource(R.drawable.stock_book_icon);
+		}
+		else if (collections.get(position).category.equals("Cards")) {
+			viewHolder.image.setImageResource(R.drawable.stock_card_icon);
+		}
+		else if (collections.get(position).category.equals("Coins")) {
+			viewHolder.image.setImageResource(R.drawable.stock_coin_icon);
+		}
+		else if (collections.get(position).category.equals("Electronics")) {
+			viewHolder.image.setImageResource(R.drawable.stock_electronic_icon);
+		}
+		else if (collections.get(position).category.equals("Figurines")) {
+			viewHolder.image.setImageResource(R.drawable.stock_figurine_icon);
+		}
+		else if (collections.get(position).category.equals("Media")) {
+			viewHolder.image.setImageResource(R.drawable.stock_media_icon);
+		}
+		else if (collections.get(position).category.equals("Stamps")) {
+			viewHolder.image.setImageResource(R.drawable.stock_stamp_icon);
+		}
+		
 		// .. and attempt to load the real one
 		loader.display(collections.get(position).photo, viewHolder.image);
 		

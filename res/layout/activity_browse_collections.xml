@@ -16,6 +16,7 @@
 	    	<ImageView android:id="@+id/header_login_button"
 		        android:layout_width="55dp"
 		        android:layout_height="55dp"
+		        android:padding="5dp"
 		        android:contentDescription="@string/login"
 		        android:src="@drawable/icon_login"
 		        android:scaleType="fitXY"
@@ -25,7 +26,6 @@
 	    	<ImageView android:id="@+id/header_user_button"
 		        android:layout_width="55dp"
 		        android:layout_height="55dp"
-		        android:padding="8dp"
 		        android:contentDescription="@string/username"
 		        android:src="@drawable/icon_person"
 		        android:scaleType="fitXY"
@@ -94,34 +94,77 @@
    	    android:layout_height="wrap_content"
    	    android:layout_below="@id/header"
    	    android:layout_alignParentLeft="true"
-   	    android:background="#FF969696"
+   	    android:background="@drawable/rounded_white"
    	    android:visibility="gone" >
     
     <TextView android:id="@+id/login"
-    	    android:layout_width="100dp"
+    	    android:layout_width="150dp"
     	    android:layout_height="wrap_content"
     	    android:padding="10dp"
+    	    android:background="@drawable/selector_rounded_top"
     	    android:text="@string/login"
     	    android:textColor="#FF000000"
+    	    android:textSize="17sp"
     	    android:clickable="true"
     	    android:onClick="login_clicked" />
     
     <View android:id="@+id/sep0"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="1dp"
         android:layout_below="@id/login"
         android:background="#FF000000" />
     
     <TextView android:id="@+id/signup"
-    	    android:layout_width="100dp"
+    	    android:layout_width="150dp"
     	    android:layout_height="wrap_content"
     	    android:layout_below="@id/sep0"
     	    android:padding="10dp"
+    	    android:background="@drawable/selector_rounded_bottom"
     	    android:text="@string/signup"
     	    android:textColor="#FF000000"
+    	    android:textSize="17sp"
     	    android:clickable="true"
     	    android:onClick="signup_clicked"  />
     
+    </RelativeLayout>
+    
+     <RelativeLayout android:id="@+id/user_menu"
+        android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:layout_below="@id/header"
+   	    android:layout_alignParentLeft="true"
+   	    android:background="@drawable/rounded_white"
+   	    android:visibility="gone" >
+    
+		    <TextView android:id="@+id/view_profile"
+		    	    android:layout_width="150dp"
+		    	    android:layout_height="wrap_content"
+		    	    android:padding="10dp"
+		    	    android:background="@drawable/selector_rounded_top"
+		    	    android:text="@string/view_profile"
+		    	    android:textColor="#FF000000"
+		    	    android:textSize="17sp"
+		    	    android:clickable="true"
+		    	    android:onClick="view_profile_clicked" />
+		    
+		    <View android:id="@+id/sep1"
+		        android:layout_width="150dp"
+		        android:layout_height="1dp"
+		        android:layout_below="@id/view_profile"
+		        android:background="#FF000000" />
+		    
+		    <TextView android:id="@+id/logout"
+		    	    android:layout_width="150dp"
+		    	    android:layout_height="wrap_content"
+		    	    android:layout_below="@id/sep1"
+		    	    android:padding="10dp"
+		    	    android:background="@drawable/selector_rounded_bottom"
+		    	    android:text="@string/logout"
+		    	    android:textColor="#FF000000"
+		    	    android:textSize="17sp"
+		    	    android:clickable="true"
+		    	    android:onClick="logout_clicked"  />
+		    
     </RelativeLayout>
 
 </RelativeLayout>

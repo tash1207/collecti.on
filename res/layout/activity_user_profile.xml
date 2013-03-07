@@ -33,24 +33,47 @@
                 android:textColor="#121212"
                 android:textStyle="bold" />
             
-            <TextView android:id="@+id/profile_collections_count"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_username"
-                android:text="16*"
-                android:textSize="18sp"
-                android:textColor="#121212"
-                android:textStyle="bold" />
+                android:layout_below="@id/profile_username" >
             
-            <TextView android:id="@+id/profile_favorites_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/profile_username"
-                android:layout_toRightOf="@id/profile_collections_count"
-                android:text="14%"
-                android:textSize="18sp"
-                android:textColor="#121212"
-                android:textStyle="bold" />
+		            <TextView android:id="@+id/profile_collections_count"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="@string/two"
+		                android:textSize="18sp"
+		                android:textColor="#121212"
+		                android:textStyle="bold" />
+		            
+		            <ImageView android:id="@+id/profile_collections_image"
+		                android:layout_width="18dp"
+		                android:layout_height="18dp"		                
+		                android:layout_toRightOf="@id/profile_collections_count"
+		                android:layout_centerVertical="true"
+		                android:contentDescription="@string/my_collections"
+		                android:src="@drawable/my_collections" />
+		            
+		            <TextView android:id="@+id/profile_favorites_count"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:layout_below="@id/profile_username"
+		                android:layout_toRightOf="@id/profile_collections_image"
+		                android:layout_marginLeft="5dp"
+		                android:text="@string/two"
+		                android:textSize="18sp"
+		                android:textColor="#121212"
+		                android:textStyle="bold" />
+		            
+		            <ImageView android:id="@+id/profile_favorites_image"
+		                android:layout_width="18dp"
+		                android:layout_height="18dp"		                
+		                android:layout_toRightOf="@id/profile_favorites_count"
+		                android:layout_centerVertical="true"
+		                android:contentDescription="@string/my_favorites"
+		                android:src="@drawable/my_favorites" />
+            
+            </RelativeLayout>
             
         </RelativeLayout>
         

@@ -41,8 +41,10 @@ public class BrowseCollections extends Activity {
 			loader.display(prefs.getString("photo", ""), user);
 		}
 		
-		Collection snowglobes = new Collection("Dave", "Snowglobes", "My Collection!", "http://www.ddetc.com/313-large/disney-vintage-christmas-snowglobe-music-box.jpg");
-		Collection stamps = new Collection("Chris", "Stamps", "WWII Era", "http://www.scarceantiqueshop.com/antique_stamp_523x600.jpg");
+		Collection snowglobes = new Collection("123", "Dave", "Snowglobes", "Christmas!", "Figurines", false, 
+				"http://www.ddetc.com/313-large/disney-vintage-christmas-snowglobe-music-box.jpg");
+		Collection stamps = new Collection("124", "Chris Dolphin", "Stamps", "WWII Era", "Stamps", false, 
+				"http://www.scarceantiqueshop.com/antique_stamp_523x600.jpg");
 		ArrayList<Collection> list = new ArrayList<Collection>();
 		list.add(snowglobes);
 		list.add(stamps);
@@ -64,6 +66,16 @@ public class BrowseCollections extends Activity {
 				getResources().getStringArray(R.array.collection_categories)));
 	}
 	
+	@Override
+	public void onStop() {
+		super.onStop();
+		RelativeLayout login_menu = (RelativeLayout) findViewById(R.id.login_menu);
+		RelativeLayout user_menu = (RelativeLayout) findViewById(R.id.user_menu);
+		
+		login_menu.setVisibility(View.GONE);
+		user_menu.setVisibility(View.GONE);
+	}
+	
 	// HEADER BUTTONS
 	
 	public void header_login_clicked(View v) {
@@ -78,8 +90,14 @@ public class BrowseCollections extends Activity {
 	}
 	
 	public void header_person_clicked(View v) {
-		Intent user_profile = new Intent(getApplicationContext(), UserProfile.class);
-		startActivity(user_profile);
+		// display the user menu
+		RelativeLayout user_menu = (RelativeLayout) findViewById(R.id.user_menu);
+		if (user_menu.getVisibility() == View.GONE) {
+			user_menu.setVisibility(View.VISIBLE);
+		}
+		else {
+			user_menu.setVisibility(View.GONE);
+		}
 	}
 
 	public void header_add_clicked(View v) {
@@ -114,6 +132,24 @@ public class BrowseCollections extends Activity {
 		Intent signup = new Intent(getApplicationContext(), Signup.class);
 		signup.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		startActivity(signup);
+	}
+	
+	// USER MENU BUTTONS
+	
+	public void view_profile_clicked(View v) {
+		Intent user_profile = new Intent(getApplicationContext(), UserProfile.class);
+		startActivity(user_profile);
+	}
+	
+	public void logout_clicked(View v) {
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.clear();
+		editor.commit();
+		
+		Intent login = new Intent(getApplicationContext(), Login.class);
+		login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(login);
+		finish();
 	}
 
 }

@@ -43,8 +43,10 @@ public class UserProfile extends Activity {
 		loader.display(prefs.getString("photo", ""), profile_pic);
 		
 		ListView my_collections = (ListView) findViewById(R.id.lvw_my_collections);
-		Collection snowglobes = new Collection("Dave", "Snowglobes", "My Collection!", "http://www.ddetc.com/313-large/disney-vintage-christmas-snowglobe-music-box.jpg");
-		Collection stamps = new Collection("Chris", "Stamps", "WWII Era", "http://www.scarceantiqueshop.com/antique_stamp_523x600.jpg");
+		Collection snowglobes = new Collection("123", "Dave", "Snowglobes", "Christmas!", "Figurines", false, 
+				"http://www.ddetc.com/313-large/disney-vintage-christmas-snowglobe-music-box.jpg");
+		Collection stamps = new Collection("124", "Chris Dolphin", "Stamps", "WWII Era", "Stamps", false, 
+				"http://www.scarceantiqueshop.com/antique_stamp_523x600.jpg");
 		ArrayList<Collection> list = new ArrayList<Collection>();
 		list.add(snowglobes);
 		list.add(stamps);

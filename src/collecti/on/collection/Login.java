@@ -49,6 +49,11 @@ public class Login extends Activity {
 		
 		String username = username_edit.getText().toString();
 		String password = password_edit.getText().toString();
+		
+		if (username.equals("") || password.equals("")) {
+			Toast.makeText(this, "Please enter a username and a password", Toast.LENGTH_SHORT).show();
+			return;
+		}
 
 		RequestParams requestParams = new RequestParams();
 		requestParams.put("username", username);
