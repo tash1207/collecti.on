@@ -7,7 +7,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import collecti.on.collection.R;
+import collecti.on.R;
 
 public class SideMenuAdapter extends ArrayAdapter<String> {
 	Context context;

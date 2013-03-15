@@ -35,115 +35,268 @@
         android:layout_height="0dp"
         android:layout_weight="3" />
     
-    <RelativeLayout android:id="@+id/grey_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:padding="15dp"
-        android:background="@drawable/rounded_grey" >
-    
-    <RelativeLayout android:id="@+id/login"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_white" >
-        
-        <EditText android:id="@+id/login_username"
+        android:layout_height="wrap_content" >
+		    
+        <RelativeLayout android:id="@+id/login_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingTop="11dp"
-            android:paddingBottom="11dp"
-            android:hint="@string/username"
-            android:inputType="text"
-            android:textSize="18sp" />
-        
-        <View android:id="@+id/separator"
-		        android:background="#DDDDDD"
-		        android:layout_width="match_parent"
-		        android:layout_height="1dp"
-		        android:layout_below="@id/login_username" />
-        
-        <EditText android:id="@+id/login_password"
+            android:layout_gravity="center" >
+				    
+				    <RelativeLayout android:id="@+id/grey_box_login"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_gravity="center"
+				        android:layout_marginLeft="35dp"
+				        android:layout_marginRight="35dp"
+				        android:padding="15dp"
+				        android:background="@drawable/rounded_grey" >
+				    
+				    <RelativeLayout android:id="@+id/login"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_gravity="center_horizontal"
+				        android:background="@drawable/rounded_white" >
+				        
+				        <EditText android:id="@+id/login_username"
+				            android:layout_width="match_parent"
+				            android:layout_height="wrap_content"
+				            android:background="#00000000"
+				            android:paddingLeft="5dp"
+				            android:paddingRight="5dp"
+				            android:paddingTop="11dp"
+				            android:paddingBottom="11dp"
+				            android:hint="@string/username"
+				            android:inputType="text"
+				            android:textSize="18sp" />
+				        
+				        <View android:id="@+id/separator1"
+						        android:background="#DDDDDD"
+						        android:layout_width="match_parent"
+						        android:layout_height="1dp"
+						        android:layout_below="@id/login_username" />
+				        
+				        <EditText android:id="@+id/login_password"
+				            android:layout_width="match_parent"
+				            android:layout_height="wrap_content"
+				            android:layout_below="@id/separator1"
+				            android:background="#00000000"
+				            android:paddingLeft="5dp"
+				            android:paddingRight="5dp"
+				            android:paddingTop="11dp"
+				            android:paddingBottom="11dp"
+				            android:hint="@string/password"
+				            android:inputType="textPassword"
+				            android:textSize="18sp" />
+				        
+				    </RelativeLayout>
+				    
+				    <Button
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_below="@id/login"
+				        android:layout_marginTop="15dp"
+				        android:layout_gravity="center_horizontal"
+				        android:background="@drawable/rounded_green"
+				        android:padding="18dp"
+				        android:text="@string/login"
+				        android:textColor="#FFFFFF"
+				        android:textSize="20sp"
+				        android:textStyle="bold"
+				        android:onClick="login_clicked" />
+				    
+				    </RelativeLayout>
+				    
+				    <TextView android:id="@+id/or_text_login"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_centerHorizontal="true"
+				        android:layout_below="@id/grey_box_login"
+				        android:layout_margin="15dp"
+				        android:text="@string/or"
+				        android:textSize="16sp"
+				        android:textColor="#000000"
+				        android:textStyle="bold" />
+				    
+				    <LinearLayout android:id="@+id/bottom_buttons_login"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_below="@id/or_text_login"
+				        android:layout_marginLeft="25dp"
+				        android:layout_marginRight="25dp"
+				        android:orientation="horizontal" >
+				        
+				        <Button
+						        android:layout_width="0dp"
+						        android:layout_height="wrap_content"
+						        android:layout_weight="1"
+						        android:layout_marginRight="5dp"
+						        android:padding="18dp"
+						        android:background="@drawable/rounded_blue"
+						        android:text="@string/signup"
+						        android:textSize="20sp"
+						        android:textColor="#FFFFFF"
+				        		android:textStyle="bold"
+						        android:onClick="bottom_signup_clicked" />
+				        
+				        <Button
+						        android:layout_width="0dp"
+						        android:layout_height="wrap_content"
+						        android:layout_weight="1"
+						        android:layout_marginLeft="5dp"
+						        android:padding="18dp"
+						        android:background="@drawable/rounded_purple"
+						        android:text="@string/browse"
+						        android:textSize="20sp"
+						        android:textColor="#FFFFFF"
+				        		android:textStyle="bold"
+						        android:onClick="browse_clicked" />
+				           
+				    </LinearLayout>
+				    
+				</RelativeLayout>
+				
+        <RelativeLayout android:id="@+id/signup_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/separator"
-            android:background="#00000000"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingTop="11dp"
-            android:paddingBottom="11dp"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:textSize="18sp" />
-        
-    </RelativeLayout>
-    
-    <Button android:id="@+id/login_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/login"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_green"
-        android:padding="18dp"
-        android:text="@string/login"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:onClick="login_clicked" />
-    
-    </RelativeLayout>
-    
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:text="@string/or"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:textStyle="bold" />
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:orientation="horizontal" >
-        
-        <Button android:id="@+id/signup"
-		        android:layout_width="0dp"
-		        android:layout_height="wrap_content"
-		        android:layout_weight="1"
-		        android:layout_marginRight="5dp"
-		        android:padding="18dp"
-		        android:background="@drawable/rounded_blue"
-		        android:text="@string/signup"
-		        android:textSize="20sp"
-		        android:textColor="#FFFFFF"
-        		android:textStyle="bold"
-		        android:onClick="signup_clicked" />
-        
-        <Button android:id="@+id/browse"
-		        android:layout_width="0dp"
-		        android:layout_height="wrap_content"
-		        android:layout_weight="1"
-		        android:layout_marginLeft="5dp"
-		        android:padding="18dp"
-		        android:background="@drawable/rounded_purple"
-		        android:text="@string/browse"
-		        android:textSize="20sp"
-		        android:textColor="#FFFFFF"
-        		android:textStyle="bold"
-		        android:onClick="browse_clicked" />
-           
-    </LinearLayout>
-    
+            android:layout_gravity="center"
+            android:visibility="gone" >
+				    
+				    <RelativeLayout android:id="@+id/grey_box_signup"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_gravity="center_horizontal"
+				        android:layout_marginLeft="35dp"
+				        android:layout_marginRight="35dp"
+				        android:padding="15dp"
+				        android:background="@drawable/rounded_grey" >        
+				    
+				    <RelativeLayout android:id="@+id/signup"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_gravity="center_horizontal"
+				        android:background="@drawable/rounded_white" >
+				        
+				        <EditText android:id="@+id/signup_username"
+				            android:layout_width="match_parent"
+				            android:layout_height="wrap_content"
+				            android:background="#00000000"
+				            android:paddingLeft="5dp"
+				            android:paddingRight="5dp"
+				            android:paddingTop="9dp"
+				            android:paddingBottom="9dp"
+				            android:hint="@string/username"
+				            android:inputType="text"
+				            android:textSize="18sp" />
+				        
+				        <View android:id="@+id/separator2"
+						        android:background="#DDDDDD"
+						        android:layout_width="match_parent"
+						        android:layout_height="1dp"
+						        android:layout_below="@id/signup_username" />
+				        
+				        <EditText android:id="@+id/signup_email"
+				            android:layout_width="match_parent"
+				            android:layout_height="wrap_content"
+				            android:layout_below="@id/separator2"
+				            android:background="#00000000"
+				            android:paddingLeft="5dp"
+				            android:paddingRight="5dp"
+				            android:paddingTop="9dp"
+				            android:paddingBottom="9dp"
+				            android:hint="@string/email_address"
+				            android:inputType="textEmailAddress"
+				            android:textSize="18sp" />
+				        
+				        <View android:id="@+id/separator3"
+						        android:background="#DDDDDD"
+						        android:layout_width="match_parent"
+						        android:layout_height="1dp"
+						        android:layout_below="@id/signup_email" />
+				        
+				        <EditText android:id="@+id/signup_password"
+				            android:layout_width="match_parent"
+				            android:layout_height="wrap_content"
+				            android:layout_below="@id/separator3"
+				            android:background="#00000000"
+				            android:paddingLeft="5dp"
+				            android:paddingRight="5dp"
+				            android:paddingTop="9dp"
+				            android:paddingBottom="9dp"
+				            android:hint="@string/password"
+				            android:inputType="textPassword"
+				            android:textSize="18sp" />
+				        
+				    </RelativeLayout>
+				    
+				    <Button
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_below="@id/signup"
+				        android:layout_marginTop="10dp"
+				        android:layout_gravity="center_horizontal"
+				        android:background="@drawable/rounded_blue"
+				        android:padding="16dp"
+				        android:text="@string/signup"
+				        android:textColor="#FFFFFF"
+				        android:textSize="20sp"
+				        android:textStyle="bold"
+				        android:onClick="signup_clicked" />
+				    
+				    </RelativeLayout>
+				    
+				    <TextView android:id="@+id/or_text_signup"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_centerHorizontal="true"
+				        android:layout_below="@id/grey_box_signup"
+				        android:layout_marginTop="15dp"
+				        android:layout_marginBottom="15dp"
+				        android:text="@string/or"
+				        android:textSize="16sp"
+				        android:textColor="#000000"
+				        android:textStyle="bold" />
+				    
+				    <LinearLayout android:id="@+id/bottom_buttons_signup"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_below="@id/or_text_signup"
+				        android:layout_marginLeft="25dp"
+				        android:layout_marginRight="25dp"
+				        android:orientation="horizontal" >
+				        
+				        <Button
+						        android:layout_width="0dp"
+						        android:layout_height="wrap_content"
+						        android:layout_weight="1"
+						        android:layout_marginRight="5dp"
+						        android:padding="18dp"
+						        android:background="@drawable/rounded_green"
+						        android:text="@string/login"
+						        android:textSize="20sp"
+						        android:textColor="#FFFFFF"
+				        		android:textStyle="bold"
+						        android:onClick="bottom_login_clicked" />
+				        
+				        <Button
+						        android:layout_width="0dp"
+						        android:layout_height="wrap_content"
+						        android:layout_weight="1"
+						        android:layout_marginLeft="5dp"
+						        android:padding="18dp"
+						        android:background="@drawable/rounded_purple"
+						        android:text="@string/browse"
+						        android:textSize="20sp"
+						        android:textColor="#FFFFFF"
+				        		android:textStyle="bold"
+						        android:onClick="browse_clicked" />
+				           
+				    </LinearLayout>
+				    
+				    </RelativeLayout>
+				    
+		</FrameLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"

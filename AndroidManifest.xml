@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="collecti.on.collection"
+    package="collecti.on"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Black.NoTitleBar" >
         <activity
-            android:name="collecti.on.collection.Login"
+            android:name="collecti.on.Login"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -26,23 +26,24 @@
             </intent-filter>
         </activity>
         <activity 
-            android:name="collecti.on.collection.Signup"
+            android:name="collecti.on.Signup"
+            android:theme="@style/Theme.Transparent"
             android:screenOrientation="portrait" >
         </activity>
         <activity 
-            android:name="collecti.on.collection.BrowseCollections"
+            android:name="collecti.on.BrowseCollections"
             android:screenOrientation="portrait" >
         </activity>
         <activity 
-            android:name="collecti.on.collection.UserProfile"
+            android:name="collecti.on.UserProfile"
             android:screenOrientation="portrait" >
         </activity>
         <activity 
-            android:name="collecti.on.collection.AddCollection"
+            android:name="collecti.on.AddCollection"
             android:screenOrientation="portrait" >
         </activity>
         <activity 
-            android:name="collecti.on.collection.ViewCollection"
+            android:name="collecti.on.ViewCollection"
             android:screenOrientation="portrait" >
         </activity>
         <activity

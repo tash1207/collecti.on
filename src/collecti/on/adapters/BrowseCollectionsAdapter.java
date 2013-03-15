@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import collecti.on.collection.R;
-import collecti.on.collection.ViewCollection;
+import collecti.on.R;
+import collecti.on.ViewCollection;
 import collecti.on.dataypes.Collection;
 import collecti.on.misc.LoadImageCache;
 
