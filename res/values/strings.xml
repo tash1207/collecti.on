@@ -53,6 +53,7 @@
     <string name="picture">Picture</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
+    <string name="shade">Shade</string>
     <string name="category">Category:</string>
     <string name="privacy">Private?</string>
     
@@ -60,7 +61,10 @@
     <string name="two">2</string>
     <string name="my_collections">My Collections</string>
     <string name="my_favorites">My Favorites</string>
-    <string name="add_item">Add First Item</string>
     <string name="create_collection">Create Collection!</string>
+    
+    <!-- Editing a Collection -->
+    <string name="add_item">Add An Item</string>
+    <string name="save_changes">Save Changes</string>
 
 </resources>

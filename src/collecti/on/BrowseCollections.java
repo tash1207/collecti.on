@@ -36,13 +36,7 @@ public class BrowseCollections extends Activity {
 		user_id = prefs.getString("user_id", "");
 		user = DatabaseHelper.getHelper(this).getUser(user_id);
 		
-		Collection snowglobes = new Collection("Dave", "Snowglobes", "Christmas!", "Figurines", false, 
-				"http://www.ddetc.com/313-large/disney-vintage-christmas-snowglobe-music-box.jpg");
-		Collection stamps = new Collection("Chris Dolphin", "Stamps", "WWII Era", "Stamps", false, 
-				"http://www.scarceantiqueshop.com/antique_stamp_523x600.jpg");
-		ArrayList<Collection> list = new ArrayList<Collection>();
-		list.add(snowglobes);
-		list.add(stamps);
+		ArrayList<Collection> list = DatabaseHelper.getHelper(this).getAllCollections();
 		ListView collections = (ListView) findViewById(R.id.lvw_collections);
 		collections.setAdapter(new BrowseCollectionsAdapter(this, R.layout.custom_lvw_collections, 
 				R.id.collection_title, list));

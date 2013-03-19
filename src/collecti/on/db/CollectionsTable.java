@@ -60,4 +60,16 @@ public class CollectionsTable {
 		
 		return collections;
 	}
+	
+	public static ArrayList<Collection> getAll(SQLiteDatabase db) {
+		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+		ArrayList<Collection> collections = new ArrayList<Collection>();
+		
+		for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext()) {
+			collections.add(new Collection(cursor));
+		}
+		cursor.close();
+		
+		return collections;
+	}
 }

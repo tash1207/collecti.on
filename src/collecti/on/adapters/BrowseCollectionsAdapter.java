@@ -14,23 +14,20 @@ import android.widget.TextView;
 import collecti.on.R;
 import collecti.on.ViewCollection;
 import collecti.on.dataypes.Collection;
-import collecti.on.misc.LoadImageCache;
+import collecti.on.misc.Utility;
 
 public class BrowseCollectionsAdapter extends ArrayAdapter<Collection> {
 	Context context;
 	int layout;
 	List<Collection> collections;
-	LoadImageCache loader;
 	boolean my_collection;
 
-	public BrowseCollectionsAdapter(Context context, int layout, int textView, 
-			List<Collection> collections) {
+	public BrowseCollectionsAdapter(Context context, int layout, int textView, List<Collection> collections) {
 		super(context, layout, textView, collections);
 
 		this.context = context;
 		this.layout = layout;
 		this.collections = collections;
-		this.loader = new LoadImageCache(this.context);
 		this.my_collection = false;
 	}
 	
@@ -41,7 +38,6 @@ public class BrowseCollectionsAdapter extends ArrayAdapter<Collection> {
 		this.context = context;
 		this.layout = layout;
 		this.collections = collections;
-		this.loader = new LoadImageCache(this.context);
 		this.my_collection = my_collection;
 	}
 
@@ -65,31 +61,31 @@ public class BrowseCollectionsAdapter extends ArrayAdapter<Collection> {
 			viewHolder.username.setVisibility(View.GONE);
 		}		
 		
+		if (!collections.get(position).photo.equals("")) {
+			viewHolder.image.setImageBitmap(Utility.getBitmapFromString(collections.get(position).photo));
+		}
 		// Set the default image ..
-		if (collections.get(position).category.equals("Books")) {
+		else if (collections.get(position).category.equals("BOOKS")) {
 			viewHolder.image.setImageResource(R.drawable.stock_book_icon);
 		}
-		else if (collections.get(position).category.equals("Cards")) {
+		else if (collections.get(position).category.equals("CARDS")) {
 			viewHolder.image.setImageResource(R.drawable.stock_card_icon);
 		}
-		else if (collections.get(position).category.equals("Coins")) {
+		else if (collections.get(position).category.equals("COINS")) {
 			viewHolder.image.setImageResource(R.drawable.stock_coin_icon);
 		}
-		else if (collections.get(position).category.equals("Electronics")) {
+		else if (collections.get(position).category.equals("ELECTRONICS")) {
 			viewHolder.image.setImageResource(R.drawable.stock_electronic_icon);
 		}
-		else if (collections.get(position).category.equals("Figurines")) {
+		else if (collections.get(position).category.equals("FIGURINES")) {
 			viewHolder.image.setImageResource(R.drawable.stock_figurine_icon);
 		}
-		else if (collections.get(position).category.equals("Media")) {
+		else if (collections.get(position).category.equals("MEDIA")) {
 			viewHolder.image.setImageResource(R.drawable.stock_media_icon);
 		}
-		else if (collections.get(position).category.equals("Stamps")) {
+		else if (collections.get(position).category.equals("STAMPS")) {
 			viewHolder.image.setImageResource(R.drawable.stock_stamp_icon);
 		}
-		
-		// .. and attempt to load the real one
-		loader.display(collections.get(position).photo, viewHolder.image);
 		
 		viewHolder.title.setText(collections.get(position).title);
 		viewHolder.username.setText("by " + collections.get(position).user_id);
@@ -100,6 +96,7 @@ public class BrowseCollectionsAdapter extends ArrayAdapter<Collection> {
 				// open that collection!
 				Intent view_collection = new Intent(context, ViewCollection.class);
 				view_collection.putExtra("collection_id", collections.get(position).id);
+				view_collection.putExtra("my_collection", my_collection);
 				context.startActivity(view_collection);
 			}
 	    };

@@ -45,6 +45,11 @@
             android:name="collecti.on.ViewCollection"
             android:screenOrientation="portrait" >
         </activity>
+        <activity 
+            android:name="collecti.on.ViewItem"
+            android:theme="@style/Theme.Transparent"
+            android:screenOrientation="portrait" >
+        </activity>
 		</application>
 
 </manifest>

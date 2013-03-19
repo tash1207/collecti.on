@@ -88,6 +88,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return CollectionsTable.getAllByUser(user_id, db);
 	}
 	
+	public ArrayList<Collection> getAllCollections() {
+		return CollectionsTable.getAll(db);
+	}
+	
 	// Items CRUD methods
 	
 	public void insertItem(Item item) {

@@ -145,6 +145,7 @@ public class AddCollection extends Activity {
 		*/
 		
 		Intent user_profile = new Intent(getApplicationContext(), UserProfile.class);
+		user_profile.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		startActivity(user_profile);
 		finish();
 	}
@@ -197,7 +198,7 @@ public class AddCollection extends Activity {
 		if (resultCode == RESULT_OK) {
 			if (requestCode == UPLOAD_PIC && data.getData() != null) {
     			Uri selectedImage = data.getData();
-    			Utility.doCrop(this, selectedImage, 100, 100, 1, 1, AFTER_CROP);
+    			Utility.doCrop(this, selectedImage, 200, 200, 1, 1, AFTER_CROP);
     		}
     		else if (requestCode == AFTER_CROP) {
 				Bundle extras = data.getExtras();
