@@ -1,16 +1,35 @@
 package collecti.on;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
+import collecti.on.dataypes.Collection;
+import collecti.on.dataypes.Item;
+import collecti.on.db.DatabaseHelper;
 import collecti.on.misc.Utility;
 
 public class ViewCollection extends Activity {
+	String collection_id;
+	Collection collection;
+	
+	boolean my_collection = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_collection);
+		
+		SharedPreferences prefs = getSharedPreferences("Collection", Context.MODE_PRIVATE);
+		String user_id = prefs.getString("user_id", "");
+		
+		collection_id = getIntent().getStringExtra("collection_id");
+		collection = DatabaseHelper.getHelper(this).getCollection(collection_id);
+		
+		if (user_id.equals(collection.user_id)) my_collection = true;
 		
 		ImageView item1 = (ImageView) findViewById(R.id.item1);
 		ImageView item2 = (ImageView) findViewById(R.id.item2);
@@ -33,6 +52,8 @@ public class ViewCollection extends Activity {
 		item6.getLayoutParams().width = screenWidth / 3;
 		item6.getLayoutParams().height = screenWidth / 3;
 		
+		ArrayList<Item> items = DatabaseHelper.getHelper(this).getItemsByCollection(collection_id);
+		item1.setImageBitmap(Utility.getBitmapFromString(items.get(0).picture));
 	}
 
 }

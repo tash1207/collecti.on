@@ -29,8 +29,8 @@ public class CollectionsTable {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 	}
 	
-	public static void insert(Collection collection, SQLiteDatabase db) {
-		db.replace(TABLE_NAME, null, collection.toContentValues());
+	public static long insert(Collection collection, SQLiteDatabase db) {
+		return db.replace(TABLE_NAME, null, collection.toContentValues());
 	}
 	
 	public static Collection get(String id, SQLiteDatabase db) {

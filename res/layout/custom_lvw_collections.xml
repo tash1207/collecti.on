@@ -9,7 +9,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:contentDescription="@string/picture"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/stock_figurine_icon" />
     
     <LinearLayout
         android:layout_width="wrap_content"

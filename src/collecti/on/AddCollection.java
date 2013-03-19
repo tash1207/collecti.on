@@ -1,8 +1,5 @@
 package collecti.on;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,7 +10,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -21,20 +17,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import collecti.on.dataypes.Collection;
+import collecti.on.dataypes.Item;
 import collecti.on.db.DatabaseHelper;
-import collecti.on.http.AsyncHttpRequest;
 import collecti.on.misc.Utility;
-
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
 public class AddCollection extends Activity {
 	SharedPreferences prefs;
 	String user_id;
-	long item_id = 0;
-	String data_url = "";
+	String item_picture = "";
 	
 	// OnActivity Result Variables
 	final static int UPLOAD_PIC = 11;
@@ -96,6 +87,7 @@ public class AddCollection extends Activity {
 		// upload item first and get item-id
 		//item_id = send_items_to_server();
 		
+		// Collection Info
 		EditText title_edit = (EditText) findViewById(R.id.edit_title);
 		EditText description_edit = (EditText) findViewById(R.id.edit_description);
 		TextView chosen_category = (TextView) findViewById(R.id.chosen_category);
@@ -107,7 +99,19 @@ public class AddCollection extends Activity {
 		Boolean is_private = privacy.isChecked();
 		
 		Collection collection = new Collection(user_id, title, description, category, is_private, "");
-		DatabaseHelper.getHelper(this).insertCollection(collection);
+		String collection_id = DatabaseHelper.getHelper(this).insertCollection(collection);
+		
+		// Item Info
+		if (!item_picture.equals("")) {
+			EditText item_title_edit = (EditText) findViewById(R.id.item_title);
+			EditText item_description_edit = (EditText) findViewById(R.id.item_description);
+			
+			String item_title = item_title_edit.getText().toString();
+			String item_description = item_description_edit.getText().toString();
+			
+			Item item = new Item(collection_id, item_title, item_description, item_picture);
+			DatabaseHelper.getHelper(this).insertItem(item);
+		}
 		
 		/*
 		RequestParams requestParams = new RequestParams();
@@ -145,6 +149,7 @@ public class AddCollection extends Activity {
 		finish();
 	}
 	
+	/*
 	public long send_items_to_server() {
 		Log.d("add_collection", "sending items to server");
 		EditText title_edit = (EditText) findViewById(R.id.item_title);
@@ -153,7 +158,7 @@ public class AddCollection extends Activity {
 		String title = title_edit.getText().toString();
 		String description = description_edit.getText().toString();
 		
-		if (title.equals("") || data_url.equals("")) {
+		if (title.equals("") || item_picture.equals("")) {
 		    Toast.makeText(this, "Please enter required information", Toast.LENGTH_SHORT).show();
 		    return 0;
 		}
@@ -162,7 +167,7 @@ public class AddCollection extends Activity {
 		requestParams.put("user_id", user_id);
 		requestParams.put("item-title", title);
 		requestParams.put("item-description", description);
-		requestParams.put("item-img-url", data_url);
+		requestParams.put("item-img-url", item_picture);
 		
 		AsyncHttpRequest.POST("/user/addItem", requestParams, new JsonHttpResponseHandler() {
 			@Override
@@ -186,6 +191,7 @@ public class AddCollection extends Activity {
 		
 		return item_id;
 	}
+	*/
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
@@ -203,7 +209,7 @@ public class AddCollection extends Activity {
 					item.setVisibility(View.VISIBLE);
 					ImageView picture = (ImageView) findViewById(R.id.item_picture);
     				picture.setImageBitmap(uploaded_photo);
-    				data_url = Base64.encodeToString(Utility.getBitmapAsByteArray(uploaded_photo), Base64.DEFAULT);
+    				item_picture = Base64.encodeToString(Utility.getBitmapAsByteArray(uploaded_photo), Base64.DEFAULT);
 				}
     		}
 		}

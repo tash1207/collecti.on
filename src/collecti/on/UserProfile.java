@@ -1,6 +1,6 @@
 package collecti.on;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
@@ -40,16 +40,7 @@ public class UserProfile extends Activity {
 		}
 		
 		ListView my_collections = (ListView) findViewById(R.id.lvw_my_collections);
-		/*
-		Collection snowglobes = new Collection("Dave", "Snowglobes", "Christmas!", "Figurines", false, 
-				"http://www.ddetc.com/313-large/disney-vintage-christmas-snowglobe-music-box.jpg");
-		Collection stamps = new Collection("Chris Dolphin", "Stamps", "WWII Era", "Stamps", false, 
-				"http://www.scarceantiqueshop.com/antique_stamp_523x600.jpg");
-		ArrayList<Collection> list = new ArrayList<Collection>();
-		list.add(snowglobes);
-		list.add(stamps);
-		*/
-		ArrayList<Collection> list = DatabaseHelper.getHelper(this).getCollectionsByUser(user_id);
+		List<Collection> list = DatabaseHelper.getHelper(this).getCollectionsByUser(user_id);
 		my_collections.setAdapter(new BrowseCollectionsAdapter(this, R.layout.custom_lvw_collections, 
 				R.id.collection_title, list, true));
 	}

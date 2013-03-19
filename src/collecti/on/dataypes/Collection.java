@@ -38,6 +38,7 @@ public class Collection {
 	public ContentValues toContentValues() {
 	  	ContentValues row = new ContentValues();
 	  	row.put("collection_id", id);
+	  	row.put("user_id", user_id);
 	  	row.put("collection_title", title);
 	  	row.put("collection_description", description);
 	  	row.put("collection_category", category);

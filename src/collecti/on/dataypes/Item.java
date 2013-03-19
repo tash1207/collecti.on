@@ -8,10 +8,13 @@ public class Item {
 	public String id;
 	public String title;
 	public String description;
-	public String photo;
+	public String picture;
 	
-	public Item(String title, String description, String picture) {
-		
+	public Item(String collection_id, String title, String description, String picture) {
+		this.collection_id = collection_id;
+		this.title = title;
+		this.description = description;
+		this.picture = picture;
 	}
 	
 	public Item(Cursor item) {
@@ -19,16 +22,16 @@ public class Item {
 	  	collection_id = item.getString(item.getColumnIndex("collection_id"));
 	  	title = item.getString(item.getColumnIndex("item_title"));
 	  	description = item.getString(item.getColumnIndex("item_description"));
-	  	photo = item.getString(item.getColumnIndex("item_picture"));
+	  	picture = item.getString(item.getColumnIndex("item_picture"));
 	}
 	
 	public ContentValues toContentValues() {
 	  	ContentValues row = new ContentValues();
-	  	//row.put("item_id", id);
+	  	row.put("item_id", id);
 	  	row.put("collection_id", collection_id);
 	  	row.put("item_title", title);
 	  	row.put("item_description", description);
-	  	row.put("item_picture", photo);
+	  	row.put("item_picture", picture);
 	  	return row;
 	}
 

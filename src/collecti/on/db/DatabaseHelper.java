@@ -65,9 +65,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	// Collections CRUD methods
-	
-	public void insertCollection(Collection collection) {
-		CollectionsTable.insert(collection, db);
+	/**
+	 * Creates a new collection in the CollectionsTable
+	 * @param collection
+	 * @return the id of the newly-created collection
+	 */
+	public String insertCollection(Collection collection) {
+		long id = CollectionsTable.insert(collection, db);
+		return String.valueOf(id);
 	}
 	
 	public Collection getCollection(String collection_id) {
@@ -96,5 +101,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public void deleteItem(Item item) {
 		ItemsTable.delete(item, db);
+	}
+	
+	public ArrayList<Item> getItemsByCollection(String collection_id) {
+		return ItemsTable.getAllByCollection(collection_id, db);
 	}
 }

@@ -99,6 +99,7 @@ public class BrowseCollectionsAdapter extends ArrayAdapter<Collection> {
 			public void onClick(View v) {
 				// open that collection!
 				Intent view_collection = new Intent(context, ViewCollection.class);
+				view_collection.putExtra("collection_id", collections.get(position).id);
 				context.startActivity(view_collection);
 			}
 	    };
