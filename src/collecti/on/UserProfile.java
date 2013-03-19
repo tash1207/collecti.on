@@ -35,7 +35,9 @@ public class UserProfile extends Activity {
 		user = DatabaseHelper.getHelper(this).getUser(user_id);
 		
 		ImageView profile_pic = (ImageView) findViewById(R.id.profile_picture);
-		profile_pic.setImageBitmap(Utility.getBitmapFromString(user.photo));
+		if (!user.photo.equals("")) {
+			profile_pic.setImageBitmap(Utility.getBitmapFromString(user.photo));
+		}
 		
 		ListView my_collections = (ListView) findViewById(R.id.lvw_my_collections);
 		/*

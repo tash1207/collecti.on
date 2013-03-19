@@ -36,15 +36,6 @@ public class BrowseCollections extends Activity {
 		user_id = prefs.getString("user_id", "");
 		user = DatabaseHelper.getHelper(this).getUser(user_id);
 		
-		if (!user_id.equals("")) {
-			ImageView login = (ImageView) findViewById(R.id.header_login_button);
-			ImageView user_photo = (ImageView) findViewById(R.id.header_user_button);
-			
-			login.setVisibility(View.GONE);
-			user_photo.setVisibility(View.VISIBLE);
-			user_photo.setImageBitmap(Utility.getBitmapFromString(user.photo));
-		}
-		
 		Collection snowglobes = new Collection("Dave", "Snowglobes", "Christmas!", "Figurines", false, 
 				"http://www.ddetc.com/313-large/disney-vintage-christmas-snowglobe-music-box.jpg");
 		Collection stamps = new Collection("Chris Dolphin", "Stamps", "WWII Era", "Stamps", false, 
@@ -68,6 +59,22 @@ public class BrowseCollections extends Activity {
 		ListView browse_collections = (ListView) findViewById(R.id.lvw_browse_collections);
 		browse_collections.setAdapter(new SideMenuAdapter(this, R.layout.custom_lvw_side_menu, R.id.side_menu_category,
 				getResources().getStringArray(R.array.collection_categories)));
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		
+		if (!user_id.equals("")) {
+			ImageView login = (ImageView) findViewById(R.id.header_login_button);
+			ImageView user_photo = (ImageView) findViewById(R.id.header_user_button);
+			
+			login.setVisibility(View.GONE);
+			user_photo.setVisibility(View.VISIBLE);
+			if (!user.photo.equals("")) {
+				user_photo.setImageBitmap(Utility.getBitmapFromString(user.photo));
+			}
+		}
 	}
 	
 	@Override

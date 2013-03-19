@@ -6,11 +6,11 @@
     
     <RelativeLayout android:id="@+id/header_nav"
     	android:layout_width="fill_parent"
-    	android:layout_height="35dp"
+    	android:layout_height="55dp"
     	android:background="@drawable/side_nav_label_background" >
     	
-        <TextView 
-            style="@style/side_nav_text"
+        <TextView
+            style="@style/side_nav_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

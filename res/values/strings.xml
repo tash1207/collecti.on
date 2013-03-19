@@ -31,13 +31,23 @@
     <string name="logout">Log Out</string>
     
     <string-array name="collection_categories">
-        <item>Books</item>
-        <item>Cards</item>
-        <item>Coins</item>
-        <item>Electronics</item>
-        <item>Figurines</item>
-        <item>Media</item>
-        <item>Stamps</item>
+        <item>BOOKS</item>
+        <item>CARDS</item>
+        <item>COINS</item>
+        <item>ELECTRONICS</item>
+        <item>FIGURINES</item>
+        <item>MEDIA</item>
+        <item>STAMPS</item>
+    </string-array>
+    
+    <string-array name="collection_category_icons" >
+        <item name = "icon1">@drawable/stock_book_icon</item>
+        <item name = "icon2">@drawable/stock_card_icon</item>
+        <item name = "icon3">@drawable/stock_coin_icon</item>
+        <item name = "icon4">@drawable/stock_electronic_icon</item>
+        <item name = "icon5">@drawable/stock_figurine_icon</item>
+        <item name = "icon6">@drawable/stock_media_icon</item>
+        <item name = "icon7">@drawable/stock_stamp_icon</item>
     </string-array>
     
     <string name="picture">Picture</string>

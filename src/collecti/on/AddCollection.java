@@ -88,13 +88,6 @@ public class AddCollection extends Activity {
 	}
 	
 	public void add_item(View v) {
-		/*
-		FilePickerAPI.setKey("AzI5rM78ISmyNrvJRkSpbz");
-		
-		Intent intent = new Intent(this, FilePicker.class);
-		startActivityForResult(intent, FilePickerAPI.REQUEST_CODE_GETFILE);
-		*/
-		
 		Intent uploadPic = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 		startActivityForResult(Intent.createChooser(uploadPic, "Upload photo using:"), UPLOAD_PIC);
 	}
@@ -196,13 +189,6 @@ public class AddCollection extends Activity {
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
-			/*
-			if (requestCode == FilePickerAPI.REQUEST_CODE_GETFILE) {
-		        Uri uri = data.getData();
-		        data_url = data.getExtras().getString("fpurl");
-		        Utility.doCrop(this, uri, 100, 100, 1, 1, AFTER_CROP);
-		    }
-		    */
 			if (requestCode == UPLOAD_PIC && data.getData() != null) {
     			Uri selectedImage = data.getData();
     			Utility.doCrop(this, selectedImage, 100, 100, 1, 1, AFTER_CROP);

@@ -17,6 +17,16 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     
+    <style name="side_nav_header" >
+        <item name ="android:textStyle">bold</item>
+        <item name ="android:textColor">#FFBAC1CC</item>
+        <item name ="android:shadowColor">@android:color/black</item>
+        <item name ="android:shadowDx">1</item>
+        <item name ="android:shadowDy">1</item>
+        <item name ="android:shadowRadius">.01</item>
+        <item name ="android:textSize">20sp</item>
+    </style>
+    
     <style name="side_nav_text" >
         <item name ="android:textStyle">bold</item>
         <item name ="android:textColor">#FFBAC1CC</item>
@@ -24,7 +34,7 @@
         <item name ="android:shadowDx">1</item>
         <item name ="android:shadowDy">1</item>
         <item name ="android:shadowRadius">.01</item>
-        <item name ="android:textSize">15sp</item>
+        <item name ="android:textSize">17sp</item>
     </style>
     
     <style name="Theme.Transparent" parent="android:Theme">

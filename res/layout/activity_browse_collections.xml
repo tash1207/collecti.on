@@ -26,6 +26,7 @@
 	    	<ImageView android:id="@+id/header_user_button"
 		        android:layout_width="55dp"
 		        android:layout_height="55dp"
+		        android:padding="5dp"
 		        android:contentDescription="@string/username"
 		        android:src="@drawable/icon_person"
 		        android:scaleType="fitXY"
