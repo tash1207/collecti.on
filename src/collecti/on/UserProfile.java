@@ -1,10 +1,6 @@
 package collecti.on;
 
-import io.filepicker.FilePickerAPI;
-
 import java.util.ArrayList;
-
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,22 +9,20 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 import collecti.on.adapters.BrowseCollectionsAdapter;
 import collecti.on.dataypes.Collection;
-import collecti.on.http.AsyncHttpRequest;
-import collecti.on.misc.LoadImageCache;
+import collecti.on.dataypes.User;
+import collecti.on.db.DatabaseHelper;
 import collecti.on.misc.Utility;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
 public class UserProfile extends Activity {
-	String username;
+	String user_id;
+	User user;
+	final static int UPLOAD_PIC = 11;
 	final static int AFTER_CROP = 22;
 	
 	@Override
@@ -37,47 +31,31 @@ public class UserProfile extends Activity {
 		setContentView(R.layout.activity_user_profile);
 		
 		SharedPreferences prefs = getSharedPreferences("Collection", Context.MODE_PRIVATE);
-		username = prefs.getString("username", "");
+		user_id = prefs.getString("user_id", "");
+		user = DatabaseHelper.getHelper(this).getUser(user_id);
+		
 		ImageView profile_pic = (ImageView) findViewById(R.id.profile_picture);
-		LoadImageCache loader = new LoadImageCache(this);
-		loader.display(prefs.getString("photo", ""), profile_pic);
+		profile_pic.setImageBitmap(Utility.getBitmapFromString(user.photo));
 		
 		ListView my_collections = (ListView) findViewById(R.id.lvw_my_collections);
-		Collection snowglobes = new Collection("123", "Dave", "Snowglobes", "Christmas!", "Figurines", false, 
+		/*
+		Collection snowglobes = new Collection("Dave", "Snowglobes", "Christmas!", "Figurines", false, 
 				"http://www.ddetc.com/313-large/disney-vintage-christmas-snowglobe-music-box.jpg");
-		Collection stamps = new Collection("124", "Chris Dolphin", "Stamps", "WWII Era", "Stamps", false, 
+		Collection stamps = new Collection("Chris Dolphin", "Stamps", "WWII Era", "Stamps", false, 
 				"http://www.scarceantiqueshop.com/antique_stamp_523x600.jpg");
 		ArrayList<Collection> list = new ArrayList<Collection>();
 		list.add(snowglobes);
 		list.add(stamps);
+		*/
+		ArrayList<Collection> list = DatabaseHelper.getHelper(this).getCollectionsByUser(user_id);
 		my_collections.setAdapter(new BrowseCollectionsAdapter(this, R.layout.custom_lvw_collections, 
 				R.id.collection_title, list, true));
 	}
 	
 	public void upload_profile_picture(View v) {
-		/*
-		FilePickerAPI.setKey("AzI5rM78ISmyNrvJRkSpbz");
-		
-		Intent intent = new Intent(this, FilePicker.class);
-		startActivityForResult(intent, FilePickerAPI.REQUEST_CODE_GETFILE);
-		*/
-		
-
-		RequestParams requestParams = new RequestParams();
-		requestParams.put("username", username);
-		
-		AsyncHttpRequest.POST("/user/collections", requestParams, new JsonHttpResponseHandler() {
-			@Override
-			public void onSuccess(JSONObject response) {
-				Log.d("json_collections", response.toString());
-			}
-			
-			@Override
-			public void onFailure(Throwable e, JSONObject errorResponse) {
-			    Log.d("json_collections", errorResponse.toString());
-			    Toast.makeText(UserProfile.this, "An error occurred", Toast.LENGTH_SHORT).show();
-			}
-		});
+		Intent uploadPic = new Intent(Intent.ACTION_PICK, 
+				android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		startActivityForResult(Intent.createChooser(uploadPic, "Upload photo using:"), UPLOAD_PIC);
 	}
 	
 	public void add_collection(View v) {
@@ -87,14 +65,18 @@ public class UserProfile extends Activity {
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
-			if (requestCode == FilePickerAPI.REQUEST_CODE_GETFILE) {
-		        Uri uri = data.getData();
-		        Utility.doCrop(this, uri, 100, 100, 1, 1, AFTER_CROP);
-		    }
-    		else if (requestCode == AFTER_CROP) {
+			if (requestCode == UPLOAD_PIC && data.getData() != null) {
+				Uri selectedImage = data.getData();
+    			Utility.doCrop(this, selectedImage, 100, 100, 1, 1, AFTER_CROP);
+			}
+			else if (requestCode == AFTER_CROP) {
 				Bundle extras = data.getExtras();
-				if (extras != null) {
+				if (extras != null) {					
 					Bitmap uploaded_photo = extras.getParcelable("data");
+					user.photo = Base64.encodeToString(Utility.getBitmapAsByteArray(uploaded_photo), 
+							Base64.DEFAULT);
+					DatabaseHelper.getHelper(this).updateUser(user);
+					
 					ImageView picture = (ImageView) findViewById(R.id.profile_picture);
     				picture.setImageBitmap(uploaded_photo);
 				}

@@ -92,7 +92,7 @@ public class BrowseCollectionsAdapter extends ArrayAdapter<Collection> {
 		loader.display(collections.get(position).photo, viewHolder.image);
 		
 		viewHolder.title.setText(collections.get(position).title);
-		viewHolder.username.setText("by " + collections.get(position).username);
+		viewHolder.username.setText("by " + collections.get(position).user_id);
 		
 		OnClickListener listener = new OnClickListener() {
 	    	

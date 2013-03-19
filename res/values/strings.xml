@@ -50,7 +50,7 @@
     <string name="two">2</string>
     <string name="my_collections">My Collections</string>
     <string name="my_favorites">My Favorites</string>
-    <string name="add_item">Add An Item</string>
+    <string name="add_item">Add First Item</string>
     <string name="create_collection">Create Collection!</string>
 
 </resources>

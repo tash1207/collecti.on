@@ -1,7 +1,5 @@
 package collecti.on;
 
-import io.filepicker.FilePickerAPI;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import collecti.on.dataypes.Collection;
+import collecti.on.db.DatabaseHelper;
 import collecti.on.http.AsyncHttpRequest;
 import collecti.on.misc.Utility;
 
@@ -32,7 +32,7 @@ import com.loopj.android.http.RequestParams;
 
 public class AddCollection extends Activity {
 	SharedPreferences prefs;
-	String username;
+	String user_id;
 	long item_id = 0;
 	String data_url = "";
 	
@@ -46,7 +46,7 @@ public class AddCollection extends Activity {
 		setContentView(R.layout.activity_add_collection);
 		
 		prefs = getSharedPreferences("Collection", Context.MODE_PRIVATE);
-		username = prefs.getString("username", "");
+		user_id = prefs.getString("user_id", "");
 	}
 	
 	public void select_category(View v) {
@@ -101,7 +101,7 @@ public class AddCollection extends Activity {
 	
 	public void create_collection(View v) {
 		// upload item first and get item-id
-		item_id = send_items_to_server();
+		//item_id = send_items_to_server();
 		
 		EditText title_edit = (EditText) findViewById(R.id.edit_title);
 		EditText description_edit = (EditText) findViewById(R.id.edit_description);
@@ -113,6 +113,10 @@ public class AddCollection extends Activity {
 		String category = chosen_category.getText().toString();
 		Boolean is_private = privacy.isChecked();
 		
+		Collection collection = new Collection(user_id, title, description, category, is_private, "");
+		DatabaseHelper.getHelper(this).insertCollection(collection);
+		
+		/*
 		RequestParams requestParams = new RequestParams();
 		requestParams.put("username", "marco");
 		requestParams.put("img-url",  data_url);
@@ -141,6 +145,7 @@ public class AddCollection extends Activity {
 			    Toast.makeText(AddCollection.this, "An error occurred", Toast.LENGTH_SHORT).show();
 			}
 		});
+		*/
 		
 		Intent user_profile = new Intent(getApplicationContext(), UserProfile.class);
 		startActivity(user_profile);
@@ -161,7 +166,7 @@ public class AddCollection extends Activity {
 		}
 				
 		RequestParams requestParams = new RequestParams();
-		requestParams.put("username", username);
+		requestParams.put("user_id", user_id);
 		requestParams.put("item-title", title);
 		requestParams.put("item-description", description);
 		requestParams.put("item-img-url", data_url);
@@ -191,12 +196,14 @@ public class AddCollection extends Activity {
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
+			/*
 			if (requestCode == FilePickerAPI.REQUEST_CODE_GETFILE) {
 		        Uri uri = data.getData();
 		        data_url = data.getExtras().getString("fpurl");
 		        Utility.doCrop(this, uri, 100, 100, 1, 1, AFTER_CROP);
 		    }
-			else if (requestCode == UPLOAD_PIC && data.getData() != null) {
+		    */
+			if (requestCode == UPLOAD_PIC && data.getData() != null) {
     			Uri selectedImage = data.getData();
     			Utility.doCrop(this, selectedImage, 100, 100, 1, 1, AFTER_CROP);
     		}

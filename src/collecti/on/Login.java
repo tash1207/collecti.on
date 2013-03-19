@@ -1,8 +1,5 @@
 package collecti.on;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,10 +13,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import collecti.on.http.AsyncHttpRequest;
-
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+import collecti.on.dataypes.User;
+import collecti.on.db.DatabaseHelper;
 
 public class Login extends Activity {
 	SharedPreferences prefs;
@@ -35,8 +30,8 @@ public class Login extends Activity {
 		editor.clear();
 		editor.commit();
 		*/
-		String username = prefs.getString("username", "");
-		if (!username.equals("")) {
+		String user_id = prefs.getString("user_id", "");
+		if (!user_id.equals("")) {
 			Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
 			startActivity(browse);
 			finish();
@@ -61,11 +56,28 @@ public class Login extends Activity {
 	public void login_clicked(View v) {
 		// what happens after logging in
 		EditText username_edit = (EditText) findViewById(R.id.login_username);
-		EditText password_edit = (EditText) findViewById(R.id.login_password);
+		//EditText password_edit = (EditText) findViewById(R.id.login_password);
 		
 		String username = username_edit.getText().toString();
-		String password = password_edit.getText().toString();
+		//String password = password_edit.getText().toString();
+		
+		String user_id = DatabaseHelper.getHelper(this).userLogin(username);
+		Log.d("user_id", user_id);
+		if (user_id.equals("")) {
+			Toast.makeText(Login.this, "Please enter a valid username/password combo", 
+		    		Toast.LENGTH_SHORT).show();
+		}
+		else {
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putString("user_id", user_id);
+			editor.commit();
+			
+			Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
+			startActivity(browse);
+			finish();
+		}
 
+		/*
 		RequestParams requestParams = new RequestParams();
 		requestParams.put("username", username);
 		requestParams.put("password", password);
@@ -100,6 +112,34 @@ public class Login extends Activity {
 			    		Toast.LENGTH_SHORT).show();
 			}
 		});
+		*/
+	}
+	
+	public void signup_clicked(View v) {
+		EditText username_edit = (EditText) findViewById(R.id.signup_username);
+		EditText email_edit = (EditText) findViewById(R.id.signup_email);
+		
+		String username = username_edit.getText().toString();
+		String email = email_edit.getText().toString();
+		
+		User user = new User(username, email, "");
+		
+		DatabaseHelper.getHelper(this).createUser(user);
+		String user_id = DatabaseHelper.getHelper(this).userLogin(user.username);
+		if (user_id.equals("")) {
+			Toast.makeText(Login.this, "Error signing up. Please try again.", 
+		    		Toast.LENGTH_SHORT).show();
+		}
+		else {
+			Log.d("user_id", user_id);
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putString("user_id", user_id);
+			editor.commit();
+			
+			Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
+			startActivity(browse);
+			finish();
+		}
 	}
 	
 	public void bottom_signup_clicked(View v) {

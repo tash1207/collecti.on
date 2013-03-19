@@ -15,13 +15,16 @@ import android.widget.Toast;
 import collecti.on.adapters.BrowseCollectionsAdapter;
 import collecti.on.adapters.SideMenuAdapter;
 import collecti.on.dataypes.Collection;
-import collecti.on.misc.LoadImageCache;
+import collecti.on.dataypes.User;
+import collecti.on.db.DatabaseHelper;
 import collecti.on.misc.Utility;
 
 import com.slidingmenu.lib.SlidingMenu;
 
 public class BrowseCollections extends Activity {
 	SharedPreferences prefs;
+	String user_id;
+	User user;
 	SlidingMenu menu;
 	
 	@Override
@@ -30,20 +33,21 @@ public class BrowseCollections extends Activity {
 		setContentView(R.layout.activity_browse_collections);
 		
 		prefs = getSharedPreferences("Collection", Context.MODE_PRIVATE);
-		String username = prefs.getString("username", "");
-		if (!username.equals("")) {
+		user_id = prefs.getString("user_id", "");
+		user = DatabaseHelper.getHelper(this).getUser(user_id);
+		
+		if (!user_id.equals("")) {
 			ImageView login = (ImageView) findViewById(R.id.header_login_button);
-			ImageView user = (ImageView) findViewById(R.id.header_user_button);
+			ImageView user_photo = (ImageView) findViewById(R.id.header_user_button);
 			
 			login.setVisibility(View.GONE);
-			user.setVisibility(View.VISIBLE);
-			LoadImageCache loader = new LoadImageCache(this);
-			loader.display(prefs.getString("photo", ""), user);
+			user_photo.setVisibility(View.VISIBLE);
+			user_photo.setImageBitmap(Utility.getBitmapFromString(user.photo));
 		}
 		
-		Collection snowglobes = new Collection("123", "Dave", "Snowglobes", "Christmas!", "Figurines", false, 
+		Collection snowglobes = new Collection("Dave", "Snowglobes", "Christmas!", "Figurines", false, 
 				"http://www.ddetc.com/313-large/disney-vintage-christmas-snowglobe-music-box.jpg");
-		Collection stamps = new Collection("124", "Chris Dolphin", "Stamps", "WWII Era", "Stamps", false, 
+		Collection stamps = new Collection("Chris Dolphin", "Stamps", "WWII Era", "Stamps", false, 
 				"http://www.scarceantiqueshop.com/antique_stamp_523x600.jpg");
 		ArrayList<Collection> list = new ArrayList<Collection>();
 		list.add(snowglobes);
@@ -101,8 +105,8 @@ public class BrowseCollections extends Activity {
 	}
 
 	public void header_add_clicked(View v) {
-		String username = prefs.getString("username", "");
-		if (!username.equals("")) {
+		String user_id = prefs.getString("user_id", "");
+		if (!user_id.equals("")) {
 			Intent add_collection = new Intent(getApplicationContext(), AddCollection.class);
 			startActivity(add_collection);
 		}
@@ -113,7 +117,7 @@ public class BrowseCollections extends Activity {
 	}
 	
 	public void header_search_clicked(View v) {
-		
+		Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show();
 	}
 
 	public void header_side_menu_clicked(View v) {

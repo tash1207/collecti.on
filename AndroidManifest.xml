@@ -21,7 +21,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -46,14 +45,6 @@
             android:name="collecti.on.ViewCollection"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-				    android:name="io.filepicker.FilePicker"
-				    android:label="@string/title_activity_file_picker" >
-				</activity>
-				<activity
-				    android:name="io.filepicker.AuthActivity"
-				    android:label="@string/title_activity_file_picker_auth" >
-				</activity>
 		</application>
 
 </manifest>
