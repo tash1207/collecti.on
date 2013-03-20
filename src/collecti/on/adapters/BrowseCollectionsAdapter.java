@@ -64,27 +64,8 @@ public class BrowseCollectionsAdapter extends ArrayAdapter<Collection> {
 		if (!collections.get(position).photo.equals("")) {
 			viewHolder.image.setImageBitmap(Utility.getBitmapFromString(collections.get(position).photo));
 		}
-		// Set the default image ..
-		else if (collections.get(position).category.equals("BOOKS")) {
-			viewHolder.image.setImageResource(R.drawable.stock_book_icon);
-		}
-		else if (collections.get(position).category.equals("CARDS")) {
-			viewHolder.image.setImageResource(R.drawable.stock_card_icon);
-		}
-		else if (collections.get(position).category.equals("COINS")) {
-			viewHolder.image.setImageResource(R.drawable.stock_coin_icon);
-		}
-		else if (collections.get(position).category.equals("ELECTRONICS")) {
-			viewHolder.image.setImageResource(R.drawable.stock_electronic_icon);
-		}
-		else if (collections.get(position).category.equals("FIGURINES")) {
-			viewHolder.image.setImageResource(R.drawable.stock_figurine_icon);
-		}
-		else if (collections.get(position).category.equals("MEDIA")) {
-			viewHolder.image.setImageResource(R.drawable.stock_media_icon);
-		}
-		else if (collections.get(position).category.equals("STAMPS")) {
-			viewHolder.image.setImageResource(R.drawable.stock_stamp_icon);
+		else {
+			viewHolder.image.setImageResource(Utility.getDefaultCollectionImage(collections.get(position)));
 		}
 		
 		viewHolder.title.setText(collections.get(position).title);

@@ -103,8 +103,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	  	return item;
 	}
 	
-	public void deleteItem(Item item) {
-		ItemsTable.delete(item, db);
+	public void deleteItem(String item_id) {
+		ItemsTable.delete(item_id, db);
 	}
 	
 	public ArrayList<Item> getItemsByCollection(String collection_id) {

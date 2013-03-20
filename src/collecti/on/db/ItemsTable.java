@@ -41,9 +41,8 @@ public class ItemsTable {
 		return item;
 	}
 	
-	public static void delete(Item item, SQLiteDatabase db) {
-    	String id = item.id;
-    	db.delete(TABLE_NAME, "item_id='" + id + "'", null);
+	public static void delete(String item_id, SQLiteDatabase db) {
+    	db.delete(TABLE_NAME, "item_id='" + item_id + "'", null);
 	}
 	
 	public static ArrayList<Item> getAllByCollection(String collection_id, SQLiteDatabase db) {

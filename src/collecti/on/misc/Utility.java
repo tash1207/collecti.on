@@ -3,6 +3,9 @@ package collecti.on.misc;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
+import collecti.on.R;
+import collecti.on.dataypes.Collection;
+
 import android.app.Activity;
 import android.app.Service;
 import android.content.ComponentName;
@@ -142,6 +145,31 @@ public class Utility {
             totalHeight += listItem.getMeasuredHeight();
         }
 		return totalHeight;
+	}
+	
+	public static int getDefaultCollectionImage(Collection collection) {
+		if (collection.category.equals("BOOKS")) {
+			return R.drawable.stock_book_icon;
+		}
+		else if (collection.category.equals("CARDS")) {
+			return R.drawable.stock_card_icon;
+		}
+		else if (collection.category.equals("COINS")) {
+			return R.drawable.stock_coin_icon;
+		}
+		else if (collection.category.equals("ELECTRONICS")) {
+			return R.drawable.stock_electronic_icon;
+		}
+		else if (collection.category.equals("FIGURINES")) {
+			return R.drawable.stock_figurine_icon;
+		}
+		else if (collection.category.equals("MEDIA")) {
+			return R.drawable.stock_media_icon;
+		}
+		else if (collection.category.equals("STAMPS")) {
+			return R.drawable.stock_stamp_icon;
+		}
+		return R.drawable.stock_figurine_icon;
 	}
 	
 }
