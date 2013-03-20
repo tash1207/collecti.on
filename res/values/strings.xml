@@ -31,6 +31,7 @@
     <string name="logout">Log Out</string>
     
     <string-array name="collection_categories">
+        <item>ALL</item>
         <item>BOOKS</item>
         <item>CARDS</item>
         <item>COINS</item>
@@ -41,6 +42,7 @@
     </string-array>
     
     <string-array name="collection_category_icons" >
+        <item name = "icon0">@drawable/stock_all_icon</item>
         <item name = "icon1">@drawable/stock_book_icon</item>
         <item name = "icon2">@drawable/stock_card_icon</item>
         <item name = "icon3">@drawable/stock_coin_icon</item>

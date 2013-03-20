@@ -51,6 +51,9 @@ public class ViewItem extends Activity {
 			picture.setImageBitmap(Utility.getBitmapFromString(item.picture));
 			title.setText(item.title);
 			description.setText(item.description);
+			
+			if (item.title.equals("")) title.setVisibility(View.GONE);
+			if (item.description.equals("")) description.setVisibility(View.GONE);
 		}
 	}
 	

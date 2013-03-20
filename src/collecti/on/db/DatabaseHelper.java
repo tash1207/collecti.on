@@ -92,6 +92,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return CollectionsTable.getAll(db);
 	}
 	
+	public ArrayList<Collection> getAllCollectionsByCategory(String category) {
+		return CollectionsTable.getAllByCategory(category, db);
+	}
+	
 	// Items CRUD methods
 	
 	public void insertItem(Item item) {

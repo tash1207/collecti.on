@@ -1,5 +1,6 @@
 package collecti.on.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import collecti.on.R;
 import collecti.on.ViewCollection;
 import collecti.on.dataypes.Collection;
+import collecti.on.dataypes.User;
+import collecti.on.db.DatabaseHelper;
 import collecti.on.misc.Utility;
 
 public class BrowseCollectionsAdapter extends ArrayAdapter<Collection> {
@@ -39,6 +42,12 @@ public class BrowseCollectionsAdapter extends ArrayAdapter<Collection> {
 		this.layout = layout;
 		this.collections = collections;
 		this.my_collection = my_collection;
+	}
+	
+	public void updateList(ArrayList<Collection> collections) {
+		this.collections.clear();
+		this.collections.addAll(collections);
+		this.notifyDataSetChanged();
 	}
 
 	static class ViewHolder {
@@ -69,7 +78,8 @@ public class BrowseCollectionsAdapter extends ArrayAdapter<Collection> {
 		}
 		
 		viewHolder.title.setText(collections.get(position).title);
-		viewHolder.username.setText("by " + collections.get(position).user_id);
+		User user = DatabaseHelper.getHelper(context).getUser(collections.get(position).user_id);
+		if (user != null) viewHolder.username.setText("by " + user.username);
 		
 		OnClickListener listener = new OnClickListener() {
 	    	

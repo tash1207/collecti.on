@@ -25,7 +25,8 @@ public class BrowseCollections extends Activity {
 	SharedPreferences prefs;
 	String user_id;
 	User user;
-	SlidingMenu menu;
+	public ListView collections;
+	public SlidingMenu menu;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class BrowseCollections extends Activity {
 		user = DatabaseHelper.getHelper(this).getUser(user_id);
 		
 		ArrayList<Collection> list = DatabaseHelper.getHelper(this).getAllCollections();
-		ListView collections = (ListView) findViewById(R.id.lvw_collections);
+		collections = (ListView) findViewById(R.id.lvw_collections);
 		collections.setAdapter(new BrowseCollectionsAdapter(this, R.layout.custom_lvw_collections, 
 				R.id.collection_title, list));
 		

@@ -13,6 +13,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import collecti.on.adapters.BrowseCollectionsAdapter;
 import collecti.on.dataypes.Collection;
 import collecti.on.dataypes.User;
@@ -43,6 +44,11 @@ public class UserProfile extends Activity {
 		List<Collection> list = DatabaseHelper.getHelper(this).getCollectionsByUser(user_id);
 		my_collections.setAdapter(new BrowseCollectionsAdapter(this, R.layout.custom_lvw_collections, 
 				R.id.collection_title, list, true));
+		
+		TextView username = (TextView) findViewById(R.id.profile_username);
+		username.setText(user.username);
+		TextView number_of_collections = (TextView) findViewById(R.id.profile_collections_count);
+		number_of_collections.setText(String.valueOf(list.size()));
 	}
 	
 	public void upload_profile_picture(View v) {

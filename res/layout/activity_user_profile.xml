@@ -53,7 +53,7 @@
 		                android:layout_centerVertical="true"
 		                android:contentDescription="@string/my_collections"
 		                android:src="@drawable/my_collections" />
-		            
+		            <!--  
 		            <TextView android:id="@+id/profile_favorites_count"
 		                android:layout_width="wrap_content"
 		                android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
 		                android:layout_centerVertical="true"
 		                android:contentDescription="@string/my_favorites"
 		                android:src="@drawable/my_favorites" />
-            
+            		-->
             </RelativeLayout>
             
         </RelativeLayout>

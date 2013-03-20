@@ -34,7 +34,7 @@ public class CollectionsTable {
 	}
 	
 	public static Collection get(String id, SQLiteDatabase db) {
-		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE collection_id='" + id + "';", null);
+		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE collection_id = '" + id + "';", null);
 		Collection collection = null;
 		
 		if ( cursor.moveToFirst() ) {
@@ -50,7 +50,7 @@ public class CollectionsTable {
 	}
 	
 	public static ArrayList<Collection> getAllByUser(String user_id, SQLiteDatabase db) {
-		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE user_id='" + user_id + "'", null);
+		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE user_id = '" + user_id + "'", null);
 		ArrayList<Collection> collections = new ArrayList<Collection>();
 		
 		for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext()) {
@@ -66,7 +66,23 @@ public class CollectionsTable {
 		ArrayList<Collection> collections = new ArrayList<Collection>();
 		
 		for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext()) {
-			collections.add(new Collection(cursor));
+			if (cursor.getString(cursor.getColumnIndex(COLLECTION_PRIVATE)).equals("0")) {
+				collections.add(new Collection(cursor));
+			}
+		}
+		cursor.close();
+		
+		return collections;
+	}
+	
+	public static ArrayList<Collection> getAllByCategory(String category, SQLiteDatabase db) {
+		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE collection_category = '" + category + "';", null);
+		ArrayList<Collection> collections = new ArrayList<Collection>();
+		
+		for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext()) {
+			if (cursor.getString(cursor.getColumnIndex(COLLECTION_PRIVATE)).equals("0")) {
+				collections.add(new Collection(cursor));
+			}
 		}
 		cursor.close();
 		

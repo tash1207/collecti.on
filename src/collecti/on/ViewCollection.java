@@ -18,6 +18,7 @@ import android.widget.TextView;
 import collecti.on.adapters.ViewCollectionAdapter;
 import collecti.on.dataypes.Collection;
 import collecti.on.dataypes.Item;
+import collecti.on.dataypes.User;
 import collecti.on.db.DatabaseHelper;
 import collecti.on.misc.Utility;
 
@@ -45,14 +46,19 @@ public class ViewCollection extends Activity {
 		collection = DatabaseHelper.getHelper(this).getCollection(collection_id);
 		
 		ImageView image = (ImageView) findViewById(R.id.collection_picture);
-		TextView title = (TextView) findViewById(R.id.collection_title);
-		TextView username = (TextView) findViewById(R.id.collection_username);
-		
 		if (!collection.photo.equals("")) image.setImageBitmap(Utility.getBitmapFromString(collection.photo));
 		else image.setImageResource(Utility.getDefaultCollectionImage(collection));
-		title.setText(collection.title);
-		username.setText("by " + collection.user_id);
 		
+		TextView title = (TextView) findViewById(R.id.collection_title);
+		title.setText(collection.title);
+
+		TextView username = (TextView) findViewById(R.id.collection_username);
+		User user = DatabaseHelper.getHelper(this).getUser(collection.user_id);
+		if (user != null) username.setText("by " + user.username);
+		
+		TextView description = (TextView) findViewById(R.id.collection_description);
+		if (collection.description.equals("")) description.setVisibility(View.GONE);
+		description.setText(collection.description);
 		
 		if (user_id.equals(collection.user_id)) my_collection = true;
 
