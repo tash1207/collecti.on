@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import collecti.on.api.APIHandler;
 import collecti.on.dataypes.User;
 import collecti.on.db.DatabaseHelper;
 
@@ -25,19 +26,14 @@ public class Login extends Activity {
 		setContentView(R.layout.activity_login);
 		
 		prefs = getSharedPreferences("Collection", Context.MODE_PRIVATE);
-		/*
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.clear();
-		editor.commit();
-		*/
+
+		// if user is already logged in, open browse collections activity
 		String user_id = prefs.getString("user_id", "");
 		if (!user_id.equals("")) {
 			Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
 			startActivity(browse);
 			finish();
 		}
-		
-		// if user is already logged in, open browse collections activity
 	}
 	
 	@Override
@@ -56,11 +52,17 @@ public class Login extends Activity {
 	public void login_clicked(View v) {
 		// what happens after logging in
 		EditText username_edit = (EditText) findViewById(R.id.login_username);
-		//EditText password_edit = (EditText) findViewById(R.id.login_password);
+		EditText password_edit = (EditText) findViewById(R.id.login_password);
 		
 		String username = username_edit.getText().toString();
-		//String password = password_edit.getText().toString();
+		String password = password_edit.getText().toString();
 		
+		// Server-Side loggin-in
+		APIHandler.init(this);
+		APIHandler.login(username, password);
+		
+		// Client-Side logging-in
+		/*
 		String user_id = DatabaseHelper.getHelper(this).userLogin(username);
 		Log.d("user_id", user_id);
 		if (user_id.equals("")) {
@@ -76,43 +78,18 @@ public class Login extends Activity {
 			startActivity(browse);
 			finish();
 		}
-
-		/*
-		RequestParams requestParams = new RequestParams();
-		requestParams.put("username", username);
-		requestParams.put("password", password);
-
-		AsyncHttpRequest.POST("/user/login", requestParams, new JsonHttpResponseHandler() {
-			@Override
-			public void onSuccess(JSONObject response) {
-				Log.d("json", response.toString());
-				
-				try {
-					if ((Boolean) response.get("login")) {
-						JSONObject user = response.getJSONObject("user");
-						SharedPreferences.Editor editor = prefs.edit();
-						editor.putString("username", user.getString("username"));
-						editor.putString("email", user.getString("email"));
-						editor.putString("photo", user.getString("url"));
-						editor.commit();
-						Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
-						startActivity(browse);
-						finish();
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			@Override
-			public void onFailure(Throwable e, JSONObject errorResponse) {
-			    Log.d("json", errorResponse.toString());
-			    
-			    Toast.makeText(Login.this, "Please enter a valid username/password combo", 
-			    		Toast.LENGTH_SHORT).show();
-			}
-		});
 		*/
+	}
+	
+	public void login_success() {
+		if (APIHandler.getUserId().equals("")) {
+			Toast.makeText(this, "invalid username/password combo", Toast.LENGTH_SHORT).show();
+		}
+		else {
+			Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
+			startActivity(browse);
+			finish();
+		}
 	}
 	
 	public void signup_clicked(View v) {
@@ -146,8 +123,6 @@ public class Login extends Activity {
 		final RelativeLayout login_layout = (RelativeLayout) findViewById(R.id.login_layout);
 		final RelativeLayout signup_layout = (RelativeLayout) findViewById(R.id.signup_layout);
 		
-		//Animation fade_out = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_out);
-		//login_layout.startAnimation(fade_out);
 		login_layout.setVisibility(View.GONE);
 		Animation fade_in = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
 		signup_layout.startAnimation(fade_in);
@@ -157,9 +132,7 @@ public class Login extends Activity {
 	public void bottom_login_clicked(View v) {
 		final RelativeLayout login_layout = (RelativeLayout) findViewById(R.id.login_layout);
 		final RelativeLayout signup_layout = (RelativeLayout) findViewById(R.id.signup_layout);
-		
-		//Animation fade_out = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_out);
-		//signup_layout.startAnimation(fade_out);
+
 		signup_layout.setVisibility(View.GONE);
 		Animation fade_in = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
 		login_layout.startAnimation(fade_in);
