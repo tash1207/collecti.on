@@ -24,7 +24,7 @@ import com.slidingmenu.lib.SlidingMenu;
 public class BrowseCollections extends Activity {
 	SharedPreferences prefs;
 	String user_id;
-	//User user;
+	User user;
 	public ListView collections;
 	public SlidingMenu menu;
 	
@@ -35,7 +35,7 @@ public class BrowseCollections extends Activity {
 		
 		prefs = getSharedPreferences("Collection", Context.MODE_PRIVATE);
 		user_id = prefs.getString("user_id", "");
-		//user = DatabaseHelper.getHelper(this).getUser(user_id);
+		user = DatabaseHelper.getHelper(this).getUser(user_id);
 		
 		ArrayList<Collection> list = DatabaseHelper.getHelper(this).getAllCollections();
 		collections = (ListView) findViewById(R.id.lvw_collections);
@@ -66,11 +66,11 @@ public class BrowseCollections extends Activity {
 			
 			login.setVisibility(View.GONE);
 			user_photo.setVisibility(View.VISIBLE);
-			/*
+			
 			if (!user.photo.equals("")) {
 				user_photo.setImageBitmap(Utility.getBitmapFromString(user.photo));
 			}
-			*/
+			
 		}
 		
 	}

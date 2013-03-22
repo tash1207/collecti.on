@@ -30,4 +30,11 @@ public class APIHandler {
 		UserAPI.login(activity, username, password);
 	}
 	
+	public static void signup(String username, String email, String password) {
+		UserAPI.signup(activity, username, email, password);
+	}
+	
+	public static void uploadUserPicture(String user_id, String picture) {
+		UserAPI.uploadPicture(user_id, picture);
+	}
 }

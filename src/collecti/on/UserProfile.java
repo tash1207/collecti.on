@@ -3,9 +3,7 @@ package collecti.on;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import collecti.on.adapters.BrowseCollectionsAdapter;
+import collecti.on.api.APIHandler;
 import collecti.on.dataypes.Collection;
 import collecti.on.dataypes.User;
 import collecti.on.db.DatabaseHelper;
@@ -31,8 +30,8 @@ public class UserProfile extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_profile);
 		
-		SharedPreferences prefs = getSharedPreferences("Collection", Context.MODE_PRIVATE);
-		user_id = prefs.getString("user_id", "");
+		APIHandler.init(this);
+		user_id = APIHandler.getUserId();
 		user = DatabaseHelper.getHelper(this).getUser(user_id);
 		
 		ImageView profile_pic = (ImageView) findViewById(R.id.profile_picture);
@@ -74,7 +73,9 @@ public class UserProfile extends Activity {
 					Bitmap uploaded_photo = extras.getParcelable("data");
 					user.photo = Base64.encodeToString(Utility.getBitmapAsByteArray(uploaded_photo), 
 							Base64.DEFAULT);
+					
 					DatabaseHelper.getHelper(this).updateUser(user);
+					APIHandler.uploadUserPicture(APIHandler.getUserId(), user.photo);
 					
 					ImageView picture = (ImageView) findViewById(R.id.profile_picture);
     				picture.setImageBitmap(uploaded_photo);

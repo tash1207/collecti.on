@@ -2,6 +2,7 @@ package collecti.on.db;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import collecti.on.dataypes.User;
 
 public class UserTable {
@@ -13,7 +14,7 @@ public class UserTable {
 
 	public static void createTable(SQLiteDatabase db) {
 		String CREATE_USERS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + 
-				USER_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "+ USER_NAME + " TEXT, " + USER_EMAIL + 
+				USER_ID + " TEXT PRIMARY KEY, " + USER_NAME + " TEXT, " + USER_EMAIL + 
 				" TEXT, " + USER_PICTURE + " TEXT)";
 		db.execSQL(CREATE_USERS_TABLE);
 	}
@@ -23,7 +24,7 @@ public class UserTable {
 	}
 	
 	public static String login(String user_name, SQLiteDatabase db) {		
-		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE user_name='" + user_name + "';", null);
+		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE user_name=?", new String[] {user_name});
 		String user_id = "";
 
 		if ( cursor.moveToFirst() ) {
@@ -36,14 +37,18 @@ public class UserTable {
 	
 	public static void create(User user, SQLiteDatabase db) {
 		db.insert(TABLE_NAME, null, user.toContentValues());
+		Log.d("user cv", user.toContentValues().toString());
 	}
 	
 	public static User get(String user_id, SQLiteDatabase db) {
-		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE user_id='" + user_id + "';", null);
+		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE user_id=?", new String[] { user_id });
 		User user = null;
+		Log.d("user", "querying");
 		
 		if ( cursor.moveToFirst() ) {
+			Log.d("user", "got a match!");
 			user = new User(cursor);
+			Log.d("user cv", user.toContentValues().toString());
 		}
 		cursor.close();
 		return user;

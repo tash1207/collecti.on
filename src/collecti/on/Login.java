@@ -26,9 +26,10 @@ public class Login extends Activity {
 		setContentView(R.layout.activity_login);
 		
 		prefs = getSharedPreferences("Collection", Context.MODE_PRIVATE);
-
+		
 		// if user is already logged in, open browse collections activity
-		String user_id = prefs.getString("user_id", "");
+		APIHandler.init(this);
+		String user_id = APIHandler.getUserId();
 		if (!user_id.equals("")) {
 			Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
 			startActivity(browse);
@@ -57,66 +58,72 @@ public class Login extends Activity {
 		String username = username_edit.getText().toString();
 		String password = password_edit.getText().toString();
 		
-		// Server-Side loggin-in
+		// Server-Side Login
 		APIHandler.init(this);
 		APIHandler.login(username, password);
-		
-		// Client-Side logging-in
-		/*
-		String user_id = DatabaseHelper.getHelper(this).userLogin(username);
-		Log.d("user_id", user_id);
-		if (user_id.equals("")) {
-			Toast.makeText(Login.this, "Please enter a valid username/password combo", 
-		    		Toast.LENGTH_SHORT).show();
-		}
-		else {
-			SharedPreferences.Editor editor = prefs.edit();
-			editor.putString("user_id", user_id);
-			editor.commit();
-			
-			Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
-			startActivity(browse);
-			finish();
-		}
-		*/
 	}
 	
-	public void login_success() {
-		if (APIHandler.getUserId().equals("")) {
-			Toast.makeText(this, "invalid username/password combo", Toast.LENGTH_SHORT).show();
+	public void login_success(String username, boolean successful) {
+		// If post request went through
+		if (successful) {
+			if (APIHandler.getUserId().equals("")) {
+				Toast.makeText(this, "invalid username/password combo", Toast.LENGTH_SHORT).show();
+			}
+			else {
+				Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
+				startActivity(browse);
+				finish();
+			}
 		}
+		// Otherwise try client-side login
 		else {
-			Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
-			startActivity(browse);
-			finish();
+			String user_id = DatabaseHelper.getHelper(this).userLogin(username);
+			if (user_id.equals("")) {
+				Toast.makeText(Login.this, "Please enter a valid username", Toast.LENGTH_SHORT).show();
+			}
+			else {
+				SharedPreferences.Editor editor = prefs.edit();
+				editor.putString("user_id", user_id);
+				editor.commit();
+				
+				Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
+				startActivity(browse);
+				finish();
+			}
 		}
 	}
 	
 	public void signup_clicked(View v) {
 		EditText username_edit = (EditText) findViewById(R.id.signup_username);
 		EditText email_edit = (EditText) findViewById(R.id.signup_email);
+		EditText password_edit = (EditText) findViewById(R.id.signup_password);
 		
 		String username = username_edit.getText().toString();
 		String email = email_edit.getText().toString();
+		String password = password_edit.getText().toString();
 		
-		User user = new User(username, email, "");
-		
+		// Server-Side signup
+		APIHandler.init(this);
+		APIHandler.signup(username, email, password);
+	}
+	
+	public void signup_success(String user_id, String username, String email) {
+		// Save user client-side
+		User user = new User(user_id, username, email, "");
 		DatabaseHelper.getHelper(this).createUser(user);
-		String user_id = DatabaseHelper.getHelper(this).userLogin(user.username);
-		if (user_id.equals("")) {
-			Toast.makeText(Login.this, "Error signing up. Please try again.", 
-		    		Toast.LENGTH_SHORT).show();
-		}
-		else {
-			Log.d("user_id", user_id);
-			SharedPreferences.Editor editor = prefs.edit();
-			editor.putString("user_id", user_id);
-			editor.commit();
-			
-			Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
-			startActivity(browse);
-			finish();
-		}
+		
+		Log.d("user", user_id);
+		Log.d("user", APIHandler.getUserId());
+		
+		user = DatabaseHelper.getHelper(this).getUser(APIHandler.getUserId());
+		Log.d("user", user.id);
+		Log.d("user", user.username);
+		Log.d("user", user.photo);
+		
+		// Go into application
+		Intent browse = new Intent(getApplicationContext(), BrowseCollections.class);
+		startActivity(browse);
+		finish();
 	}
 	
 	public void bottom_signup_clicked(View v) {

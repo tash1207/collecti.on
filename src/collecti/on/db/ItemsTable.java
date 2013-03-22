@@ -17,7 +17,7 @@ public class ItemsTable {
 
 	public static void createTable(SQLiteDatabase db) {
 		String CREATE_ITEMS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + COLLECTION_ID + 
-				" INTEGER, " + ITEM_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "+ ITEM_TITLE + " TEXT, " + 
+				" INTEGER, " + ITEM_ID + " TEXT PRIMARY KEY, "+ ITEM_TITLE + " TEXT, " + 
 				ITEM_DESCRIPTION + " TEXT, " + ITEM_PICTURE + " TEXT)";
 		db.execSQL(CREATE_ITEMS_TABLE);
 	}
